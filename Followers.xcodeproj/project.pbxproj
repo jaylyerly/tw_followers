@@ -14,6 +14,8 @@
 		EC017F5F188B23530016F8F5 /* SBFTwitterUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC017F5E188B23530016F8F5 /* SBFTwitterUserTests.m */; };
 		EC017F61188B2C8F0016F8F5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC017F60188B2C8F0016F8F5 /* XCTest.framework */; };
 		EC15EE79188B2F6000D948D1 /* SBFTwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EC549AE5166E86B7004C4009 /* SBFTwitterUser.m */; };
+		EC15EE7E188B381000D948D1 /* GTMCodeCoverageApp.m in Sources */ = {isa = PBXBuildFile; fileRef = EC15EE7B188B37BB00D948D1 /* GTMCodeCoverageApp.m */; };
+		EC15EE81188B39F800D948D1 /* GTMCodeCoverageTestsXC.m in Sources */ = {isa = PBXBuildFile; fileRef = EC15EE80188B39F800D948D1 /* GTMCodeCoverageTestsXC.m */; };
 		EC549AA0166D5B65004C4009 /* libOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC549A9B166D5B65004C4009 /* libOAuth.a */; };
 		EC549AA1166D5B65004C4009 /* SA_OAuthTwitterController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC549A9D166D5B65004C4009 /* SA_OAuthTwitterController.m */; };
 		EC549AA2166D5B65004C4009 /* SA_OAuthTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = EC549A9F166D5B65004C4009 /* SA_OAuthTwitterEngine.m */; };
@@ -73,6 +75,9 @@
 		EC017F57188B22BA0016F8F5 /* Followers Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Followers Tests-Prefix.pch"; sourceTree = "<group>"; };
 		EC017F5E188B23530016F8F5 /* SBFTwitterUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFTwitterUserTests.m; sourceTree = "<group>"; };
 		EC017F60188B2C8F0016F8F5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Developer/Library/Frameworks/XCTest.framework; sourceTree = SDKROOT; };
+		EC15EE7A188B37BB00D948D1 /* GTMCodeCoverageApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTMCodeCoverageApp.h; path = "Followers Tests/GTMCodeCoverageApp.h"; sourceTree = "<group>"; };
+		EC15EE7B188B37BB00D948D1 /* GTMCodeCoverageApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMCodeCoverageApp.m; path = "Followers Tests/GTMCodeCoverageApp.m"; sourceTree = "<group>"; };
+		EC15EE80188B39F800D948D1 /* GTMCodeCoverageTestsXC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GTMCodeCoverageTestsXC.m; path = "Followers Tests/GTMCodeCoverageTestsXC.m"; sourceTree = "<group>"; };
 		EC549A9B166D5B65004C4009 /* libOAuth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOAuth.a; path = SA_OAuth/libOAuth.a; sourceTree = "<group>"; };
 		EC549A9C166D5B65004C4009 /* SA_OAuthTwitterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SA_OAuthTwitterController.h; path = SA_OAuth/SA_OAuthTwitterController.h; sourceTree = "<group>"; };
 		EC549A9D166D5B65004C4009 /* SA_OAuthTwitterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SA_OAuthTwitterController.m; path = SA_OAuth/SA_OAuthTwitterController.m; sourceTree = "<group>"; };
@@ -204,6 +209,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		EC15EE7D188B380200D948D1 /* GTM */ = {
+			isa = PBXGroup;
+			children = (
+				EC15EE7A188B37BB00D948D1 /* GTMCodeCoverageApp.h */,
+				EC15EE7B188B37BB00D948D1 /* GTMCodeCoverageApp.m */,
+				EC15EE80188B39F800D948D1 /* GTMCodeCoverageTestsXC.m */,
+			);
+			name = GTM;
+			sourceTree = "<group>";
+		};
 		ECB6652A166D4F7D0086F91E = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +294,7 @@
 		ECB66560166D53120086F91E /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				EC15EE7D188B380200D948D1 /* GTM */,
 				ECB66564166D53970086F91E /* SAOAuthTwitterEngine */,
 				ECB66563166D53880086F91E /* MGTwitterEngine */,
 				ECB66562166D536E0086F91E /* OAuth Consumer */,
@@ -466,6 +482,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC15EE81188B39F800D948D1 /* GTMCodeCoverageTestsXC.m in Sources */,
 				EC15EE79188B2F6000D948D1 /* SBFTwitterUser.m in Sources */,
 				EC017F5F188B23530016F8F5 /* SBFTwitterUserTests.m in Sources */,
 				EC017F56188B22BA0016F8F5 /* Followers_Tests.m in Sources */,
@@ -489,6 +506,7 @@
 				EC549AD7166D5BD5004C4009 /* MGTwitterMiscLibXMLParser.m in Sources */,
 				EC549AD8166D5BD5004C4009 /* MGTwitterMiscParser.m in Sources */,
 				EC549AD9166D5BD5004C4009 /* MGTwitterStatusesLibXMLParser.m in Sources */,
+				EC15EE7E188B381000D948D1 /* GTMCodeCoverageApp.m in Sources */,
 				EC549ADA166D5BD5004C4009 /* MGTwitterStatusesParser.m in Sources */,
 				EC549ADB166D5BD5004C4009 /* MGTwitterUsersLibXMLParser.m in Sources */,
 				EC549ADC166D5BD5004C4009 /* MGTwitterUsersParser.m in Sources */,
@@ -617,10 +635,14 @@
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					"GTM_USING_XCTEST=1",
+					"GTM_IS_COVERAGE_BUILD=1",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -644,6 +666,8 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
