@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "SBFTwitterUser.h"
 
 @interface SBFTwitterUserTests : XCTestCase
 
@@ -26,9 +27,46 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testTwitterUser
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    NSString *screenName = @"Super";
+    NSString *name = @"Clark Kent";
+    NSString *location = @"Metropolis";
+    NSString *description = @"Just another working stiff";
+    NSString *profile_image_url = @"http://upload.wikimedia.org/wikipedia/en/7/72/Superman.jpg";
+    NSString *url = @"http://en.wikipedia.org/wiki/Daily_Planet";
+    NSString *follwers_count = @"1933";
+    NSString *statuses_count = @"20114";
+    NSString *st_text = @"Just making another phone call.";
+    NSString *st_id = @"1234";
+    NSString *st_in_reply_to_status_id = @"1233";
+    
+    NSDictionary *twDict = @{
+                             @"screen_name":        screenName,
+                             @"name":               name,
+                             @"location":           location,
+                             @"description":        description,
+                             @"profile_image_url":  profile_image_url,
+                             @"url":                url,
+                             @"followers_count":    follwers_count,
+                             @"statuses_count":     statuses_count,
+                             @"status":@{
+                                            @"text":                    st_text,
+                                            @"id":                      st_id,
+                                            @"in_reply_to_status_id":   st_in_reply_to_status_id,
+                                        },
+                             };
+    SBFTwitterUser *user = [[SBFTwitterUser alloc] initWithDictionary:twDict];
+    
+    XCTAssertTrue([user.username           isEqualToString:screenName]);
+    XCTAssertTrue([user.name               isEqualToString:name]);
+    XCTAssertTrue([user.location           isEqualToString:location]);
+    XCTAssertTrue([user.twDescription      isEqualToString:description]);
+    XCTAssertTrue([user.lastTweet          isEqualToString:st_text ]);
+    XCTAssertTrue([user.url.absoluteString isEqualToString:url]);
+
+    XCTAssertTrue(user.followers_count == [follwers_count integerValue]);
+    XCTAssertTrue(user.status_count    == [statuses_count integerValue] );
 }
 
 @end
