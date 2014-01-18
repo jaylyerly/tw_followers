@@ -1,0 +1,9 @@
+language: objective-c
+
+xcode_project: Followers.xcodeproj
+xcode_scheme: Followers
+
+before_script: travis/before_script.sh
+script: travis/script.sh
+after_success: travis/after_script.sh
+

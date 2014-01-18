@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EC017F4D188B22BA0016F8F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB6653B166D4F7D0086F91E /* Foundation.framework */; };
+		EC017F4E188B22BA0016F8F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB66539166D4F7D0086F91E /* UIKit.framework */; };
+		EC017F54188B22BA0016F8F5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EC017F52188B22BA0016F8F5 /* InfoPlist.strings */; };
+		EC017F56188B22BA0016F8F5 /* Followers_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC017F55188B22BA0016F8F5 /* Followers_Tests.m */; };
+		EC017F5F188B23530016F8F5 /* SBFTwitterUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EC017F5E188B23530016F8F5 /* SBFTwitterUserTests.m */; };
+		EC017F61188B2C8F0016F8F5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC017F60188B2C8F0016F8F5 /* XCTest.framework */; };
+		EC15EE79188B2F6000D948D1 /* SBFTwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EC549AE5166E86B7004C4009 /* SBFTwitterUser.m */; };
 		EC549AA0166D5B65004C4009 /* libOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC549A9B166D5B65004C4009 /* libOAuth.a */; };
 		EC549AA1166D5B65004C4009 /* SA_OAuthTwitterController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC549A9D166D5B65004C4009 /* SA_OAuthTwitterController.m */; };
 		EC549AA2166D5B65004C4009 /* SA_OAuthTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = EC549A9F166D5B65004C4009 /* SA_OAuthTwitterEngine.m */; };
@@ -48,7 +55,24 @@
 		ECB665AB166D53F00086F91E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB665AA166D53F00086F91E /* libxml2.dylib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EC017F58188B22BA0016F8F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ECB6652C166D4F7D0086F91E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ECB66534166D4F7D0086F91E;
+			remoteInfo = Followers;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		EC017F4A188B22BA0016F8F5 /* FollowersTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FollowersTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC017F51188B22BA0016F8F5 /* Followers Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Followers Tests-Info.plist"; sourceTree = "<group>"; };
+		EC017F53188B22BA0016F8F5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EC017F55188B22BA0016F8F5 /* Followers_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Followers_Tests.m; sourceTree = "<group>"; };
+		EC017F57188B22BA0016F8F5 /* Followers Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Followers Tests-Prefix.pch"; sourceTree = "<group>"; };
+		EC017F5E188B23530016F8F5 /* SBFTwitterUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFTwitterUserTests.m; sourceTree = "<group>"; };
+		EC017F60188B2C8F0016F8F5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Developer/Library/Frameworks/XCTest.framework; sourceTree = SDKROOT; };
 		EC549A9B166D5B65004C4009 /* libOAuth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOAuth.a; path = SA_OAuth/libOAuth.a; sourceTree = "<group>"; };
 		EC549A9C166D5B65004C4009 /* SA_OAuthTwitterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SA_OAuthTwitterController.h; path = SA_OAuth/SA_OAuthTwitterController.h; sourceTree = "<group>"; };
 		EC549A9D166D5B65004C4009 /* SA_OAuthTwitterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SA_OAuthTwitterController.m; path = SA_OAuth/SA_OAuthTwitterController.m; sourceTree = "<group>"; };
@@ -134,6 +158,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EC017F47188B22BA0016F8F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC017F4E188B22BA0016F8F5 /* UIKit.framework in Frameworks */,
+				EC017F61188B2C8F0016F8F5 /* XCTest.framework in Frameworks */,
+				EC017F4D188B22BA0016F8F5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ECB66532166D4F7D0086F91E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -149,10 +183,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EC017F4F188B22BA0016F8F5 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				EC017F55188B22BA0016F8F5 /* Followers_Tests.m */,
+				EC017F5E188B23530016F8F5 /* SBFTwitterUserTests.m */,
+				EC017F50188B22BA0016F8F5 /* Supporting Files */,
+			);
+			name = Tests;
+			path = "Followers Tests";
+			sourceTree = "<group>";
+		};
+		EC017F50188B22BA0016F8F5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EC017F51188B22BA0016F8F5 /* Followers Tests-Info.plist */,
+				EC017F52188B22BA0016F8F5 /* InfoPlist.strings */,
+				EC017F57188B22BA0016F8F5 /* Followers Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		ECB6652A166D4F7D0086F91E = {
 			isa = PBXGroup;
 			children = (
 				ECB6653F166D4F7D0086F91E /* Followers */,
+				EC017F4F188B22BA0016F8F5 /* Tests */,
 				ECB66538166D4F7D0086F91E /* Frameworks */,
 				ECB66536166D4F7D0086F91E /* Products */,
 			);
@@ -162,6 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				ECB66535166D4F7D0086F91E /* Followers.app */,
+				EC017F4A188B22BA0016F8F5 /* FollowersTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -169,6 +226,7 @@
 		ECB66538166D4F7D0086F91E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EC017F60188B2C8F0016F8F5 /* XCTest.framework */,
 				ECB665AA166D53F00086F91E /* libxml2.dylib */,
 				ECB66539166D4F7D0086F91E /* UIKit.framework */,
 				ECB6653B166D4F7D0086F91E /* Foundation.framework */,
@@ -305,6 +363,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EC017F49188B22BA0016F8F5 /* FollowersTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC017F5A188B22BA0016F8F5 /* Build configuration list for PBXNativeTarget "FollowersTests" */;
+			buildPhases = (
+				EC017F46188B22BA0016F8F5 /* Sources */,
+				EC017F47188B22BA0016F8F5 /* Frameworks */,
+				EC017F48188B22BA0016F8F5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EC017F59188B22BA0016F8F5 /* PBXTargetDependency */,
+			);
+			name = FollowersTests;
+			productName = "Followers Tests";
+			productReference = EC017F4A188B22BA0016F8F5 /* FollowersTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		ECB66534166D4F7D0086F91E /* Followers */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ECB66559166D4F7D0086F91E /* Build configuration list for PBXNativeTarget "Followers" */;
@@ -331,6 +407,11 @@
 				CLASSPREFIX = SBF;
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "Jay Lyerly";
+				TargetAttributes = {
+					EC017F49188B22BA0016F8F5 = {
+						TestTargetID = ECB66534166D4F7D0086F91E;
+					};
+				};
 			};
 			buildConfigurationList = ECB6652F166D4F7D0086F91E /* Build configuration list for PBXProject "Followers" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -345,11 +426,20 @@
 			projectRoot = "";
 			targets = (
 				ECB66534166D4F7D0086F91E /* Followers */,
+				EC017F49188B22BA0016F8F5 /* FollowersTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EC017F48188B22BA0016F8F5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC017F54188B22BA0016F8F5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ECB66533166D4F7D0086F91E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -372,6 +462,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EC017F46188B22BA0016F8F5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC15EE79188B2F6000D948D1 /* SBFTwitterUser.m in Sources */,
+				EC017F5F188B23530016F8F5 /* SBFTwitterUserTests.m in Sources */,
+				EC017F56188B22BA0016F8F5 /* Followers_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ECB66531166D4F7D0086F91E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -403,7 +503,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EC017F59188B22BA0016F8F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ECB66534166D4F7D0086F91E /* Followers */;
+			targetProxy = EC017F58188B22BA0016F8F5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		EC017F52188B22BA0016F8F5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EC017F53188B22BA0016F8F5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		ECB66542166D4F7D0086F91E /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -423,6 +539,71 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EC017F5B188B22BA0016F8F5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Followers.app/Followers";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Followers Tests/Followers Tests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Followers Tests/Followers Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		EC017F5C188B22BA0016F8F5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Followers.app/Followers";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Followers Tests/Followers Tests-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "Followers Tests/Followers Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		ECB66557166D4F7D0086F91E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -445,7 +626,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -466,7 +647,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -512,6 +693,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EC017F5A188B22BA0016F8F5 /* Build configuration list for PBXNativeTarget "FollowersTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC017F5B188B22BA0016F8F5 /* Debug */,
+				EC017F5C188B22BA0016F8F5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		ECB6652F166D4F7D0086F91E /* Build configuration list for PBXProject "Followers" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
