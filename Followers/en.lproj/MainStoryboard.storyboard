@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C3006" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="H0p-Vb-t8b">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+    </dependencies>
+    <scenes>
+        <!--Table View Controller - Followers-->
+        <scene sceneID="894-fL-Wwz">
+            <objects>
+                <tableViewController id="o3o-Kp-ZNR" customClass="SBFTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="RcJ-bC-CeR">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Followers" id="GjU-5R-zc3"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jwa-CY-j3W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="309" y="-604"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="55H-q9-OIi">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="H0p-Vb-t8b" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9iH-04-nIE">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2" kind="relationship" relationship="rootViewController" id="4pg-gM-jj3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A8a-IF-TYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-708" y="-612"/>
+        </scene>
+        <!--View Controller - Account-->
+        <scene sceneID="5">
+            <objects>
+                <viewController id="2" customClass="SBFViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EJh-2u-mKs">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000013" contentMode="scaleToFill" image="miniDotsBG.jpeg" translatesAutoresizingMaskIntoConstraints="NO" id="jDU-FK-bLA"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYN-vg-c5r">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="login:" destination="2" eventType="touchUpInside" id="pb4-Pk-3sV"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Sx-WE-z1S">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logout:" destination="2" eventType="touchUpInside" id="3zE-K1-cxN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M52-XI-BRo">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="View Followers">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="o3o-Kp-ZNR" kind="push" identifier="viewFollowers" id="17E-Cp-lvx"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qc-CM-pWG">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="237" id="JZ7-wa-gUb"/>
+                                    <constraint firstAttribute="height" constant="68" id="YFN-RV-fWD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="48"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="for the Twitter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wir-2e-gZ5">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Connected as" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5m7-Dc-BqL">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="@Username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wq6-fk-JPO">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49" id="XX0-hI-xgK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wq6-fk-JPO" firstAttribute="leading" secondItem="EJh-2u-mKs" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="0Na-gk-hce"/>
+                            <constraint firstItem="M52-XI-BRo" firstAttribute="leading" secondItem="EJh-2u-mKs" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="3s5-2d-sBh"/>
+                            <constraint firstAttribute="trailing" secondItem="3Sx-WE-z1S" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="AUQ-3C-aWH"/>
+                            <constraint firstItem="3Sx-WE-z1S" firstAttribute="leading" secondItem="EJh-2u-mKs" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="CBE-am-0AF"/>
+                            <constraint firstAttribute="centerY" secondItem="eYN-vg-c5r" secondAttribute="centerY" type="user" id="CFs-Wb-Npa"/>
+                            <constraint firstAttribute="bottom" secondItem="wq6-fk-JPO" secondAttribute="bottom" constant="38" id="Slq-Dc-NHq"/>
+                            <constraint firstAttribute="centerX" secondItem="eYN-vg-c5r" secondAttribute="centerX" type="user" id="Tf6-Nf-KHA"/>
+                            <constraint firstItem="eYN-vg-c5r" firstAttribute="leading" secondItem="EJh-2u-mKs" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="VfX-sC-M5M"/>
+                            <constraint firstItem="Wir-2e-gZ5" firstAttribute="centerX" secondItem="9qc-CM-pWG" secondAttribute="centerX" type="default" id="WR8-xv-bdT"/>
+                            <constraint firstItem="jDU-FK-bLA" firstAttribute="leading" secondItem="EJh-2u-mKs" secondAttribute="leading" type="default" id="Xd6-Rx-h2S"/>
+                            <constraint firstItem="eYN-vg-c5r" firstAttribute="top" secondItem="M52-XI-BRo" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="cZH-rX-aIS"/>
+                            <constraint firstItem="5m7-Dc-BqL" firstAttribute="centerX" secondItem="wq6-fk-JPO" secondAttribute="centerX" type="default" id="hts-xG-gbU"/>
+                            <constraint firstItem="3Sx-WE-z1S" firstAttribute="top" secondItem="eYN-vg-c5r" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="lBM-Rv-Jg1"/>
+                            <constraint firstAttribute="trailing" secondItem="wq6-fk-JPO" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="mVs-uW-D1W"/>
+                            <constraint firstItem="9qc-CM-pWG" firstAttribute="top" secondItem="EJh-2u-mKs" secondAttribute="top" constant="20" symbolic="YES" type="default" id="rEt-2Y-8FW"/>
+                            <constraint firstItem="5m7-Dc-BqL" firstAttribute="leading" secondItem="Wir-2e-gZ5" secondAttribute="leading" type="default" id="ry0-bU-ICU"/>
+                            <constraint firstItem="Wir-2e-gZ5" firstAttribute="top" secondItem="9qc-CM-pWG" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="vMP-4s-QwG"/>
+                            <constraint firstItem="jDU-FK-bLA" firstAttribute="top" secondItem="EJh-2u-mKs" secondAttribute="top" type="default" id="wDJ-pU-q6p"/>
+                            <constraint firstAttribute="trailing" secondItem="M52-XI-BRo" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="xCa-c3-KhK"/>
+                            <constraint firstItem="wq6-fk-JPO" firstAttribute="top" secondItem="5m7-Dc-BqL" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="zKj-Kx-8Y5"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Account" id="1Ad-qL-s40"/>
+                    <connections>
+                        <outlet property="connectedLabel" destination="5m7-Dc-BqL" id="lbX-AB-CsA"/>
+                        <outlet property="followersButton" destination="M52-XI-BRo" id="Ssj-0W-Biq"/>
+                        <outlet property="loginButton" destination="eYN-vg-c5r" id="kua-CF-skz"/>
+                        <outlet property="logoutButton" destination="3Sx-WE-z1S" id="H7s-ri-CLM"/>
+                        <outlet property="usernameLabel" destination="wq6-fk-JPO" id="CYv-cb-8YD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-208" y="-604"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="miniDotsBG.jpeg" width="720" height="1280"/>
+    </resources>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="SBFTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SBFTableViewController.h"/>
+        </class>
+        <class className="SBFViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SBFViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="login:"/>
+                <relationship kind="outlet" name="connectedLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="followersButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="logoutButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="usernameLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
