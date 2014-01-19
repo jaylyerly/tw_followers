@@ -11,5 +11,5 @@ echo Find GCNO
 find $GCOV_SRC_DIR -name \*.gcno
 
 
-coveralls -b $GCOV_SRC_DIR --verbose -r . -x .m -x .h -x .mm -e SA_OAuth -e MGTwitter -e OAuthConsumer -e Followers\ Tests/
+coveralls -r $GCOV_SRC_DIR --verbose -b . -x .m -x .h -x .mm -e SA_OAuth -e MGTwitter -e OAuthConsumer -e Followers\ Tests/
 
