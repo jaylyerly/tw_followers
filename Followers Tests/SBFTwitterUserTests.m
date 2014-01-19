@@ -10,7 +10,6 @@
 #import "SBFTwitterUser.h"
 
 @interface SBFTwitterUserTests : XCTestCase
-
 @end
 
 @implementation SBFTwitterUserTests
@@ -67,6 +66,24 @@
 
     XCTAssertTrue(user.followers_count == [follwers_count integerValue]);
     XCTAssertTrue(user.status_count    == [statuses_count integerValue] );
+}
+
+- (void)testCompareName{
+    SBFTwitterUser *bats = [[SBFTwitterUser alloc] initWithDictionary:@{@"screen_name":@"Batman",   @"name":@"Bruce Wayne"}];
+    SBFTwitterUser *sups = [[SBFTwitterUser alloc] initWithDictionary:@{@"screen_name":@"Superman", @"name":@"Clark Kent" }];
+    
+    XCTAssertTrue([bats compareUserName:sups] == NSOrderedAscending);
+    XCTAssertTrue([sups compareUserName:sups] == NSOrderedSame);
+    XCTAssertTrue([sups compareUserName:bats] == NSOrderedDescending);
+}
+
+- (void)testCompareUser{
+    SBFTwitterUser *bats = [[SBFTwitterUser alloc] initWithDictionary:@{@"screen_name":@"Batman",   @"name":@"Bruce Wayne"}];
+    SBFTwitterUser *sups = [[SBFTwitterUser alloc] initWithDictionary:@{@"screen_name":@"Superman", @"name":@"Clark Kent" }];
+    
+    XCTAssertTrue([bats compareName:sups] == NSOrderedAscending);
+    XCTAssertTrue([sups compareName:sups] == NSOrderedSame);
+    XCTAssertTrue([sups compareName:bats] == NSOrderedDescending);
 }
 
 @end

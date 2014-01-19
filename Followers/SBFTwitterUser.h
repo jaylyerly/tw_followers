@@ -23,5 +23,7 @@
 @property (readwrite) NSUInteger listIndex;
 
 -(id) initWithDictionary:(NSDictionary*)userDict;
+- (NSComparisonResult)compareUserName:(SBFTwitterUser *)otherUser;
+- (NSComparisonResult)compareName:(SBFTwitterUser *)otherUser;
 
 @end
