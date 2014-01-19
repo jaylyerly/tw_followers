@@ -5,5 +5,5 @@ set -e
 #brew install xctool
 
 #sudo pip install cpp-coveralls --use-mirrors
-easy_install cpp-coveralls
+sudo easy_install cpp-coveralls
 
