@@ -8,15 +8,13 @@
 
 #import "SBFViewController.h"
 
-#import "SA_OAuthTwitterEngine.h"
-#import "SA_OAuthTwitterController.h"
 
 #import "SBFTableViewController.h"
 
 #define kOAuthConsumerKey				@"1ZpyrD6z9JigIQJ7BAPfw"
 #define kOAuthConsumerSecret			@"cjjMyfUENuyztrTQPCqGuzn9UhP8UETQKUnLQpPgVg8"
 
-@interface SBFViewController () <SA_OAuthTwitterControllerDelegate,SA_OAuthTwitterEngineDelegate>{
+@interface SBFViewController (){
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *loginButton;
@@ -24,7 +22,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *followersButton;
 @property (strong, nonatomic) IBOutlet UILabel *connectedLabel;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (strong, nonatomic) SA_OAuthTwitterEngine *twEngine;
 @property (strong, nonatomic) NSMutableDictionary* taskDict;
 @property (strong, nonatomic) SBFTableViewController* tableView;
 @property (strong, nonatomic) NSDate* lastErrorDate;
@@ -39,17 +36,13 @@
 {
     [super viewDidLoad];
     DLog(@"viewDidLoad");
-    self.twEngine = nil;
     self.taskDict = [NSMutableDictionary dictionary];
     
-    self.twEngine = [[SA_OAuthTwitterEngine alloc] initOAuthWithDelegate:self];
-    self.twEngine.consumerKey = kOAuthConsumerKey;
-    self.twEngine.consumerSecret = kOAuthConsumerSecret;
     self.tableView = nil;
     self.lastErrorDate = [NSDate distantPast];
-    if (self.twEngine.isAuthorized){
-        self.jumpToFollowers = YES;
-    }
+//    if (self.twEngine.isAuthorized){
+//        self.jumpToFollowers = YES;
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -78,7 +71,7 @@
 - (IBAction)logout:(id)sender {
     DLog(@"Logout button pressed");
     [self storeCachedTwitterOAuthData:nil forUsername:nil];    // nuked the stored credentials
-    [self.twEngine clearAccessToken];
+//    [self.twEngine clearAccessToken];
     [self refreshButtonState];
     [self.view setNeedsDisplay];
 }
@@ -86,7 +79,7 @@
 - (IBAction)login:(id)sender {
     DLog(@"Login button pressed");
     
-        
+/*
     UIViewController *twLoginController = [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine:self.twEngine delegate:self];
     
     if (twLoginController){         // this is nil if we can use store credentials
@@ -94,6 +87,7 @@
     }else{
         [self performSegueWithIdentifier:@"viewFollowers" sender:self];
     }
+*/
     [self refreshButtonState];
 }
 
@@ -103,11 +97,11 @@
         // set the username for the tableview display
         SBFTableViewController* tableView = (SBFTableViewController*)segue.destinationViewController;
         self.tableView = tableView;
-        tableView.username = self.twEngine.username;
+//        tableView.username = self.twEngine.username;
         //tableView.username = @"andriajensen";   
         //tableView.username = @"hotdogsladies";
         //tableView.username = @"TheEllenShow";  
-        tableView.twEngine = self.twEngine;
+//        tableView.twEngine = self.twEngine;
         tableView.stackLevel = 0;
         tableView.rootViewController = self;
     }
@@ -125,7 +119,7 @@
     if (animate == NO){
         animDuration = 0.0;
     }
-    
+/*
     if (self.twEngine.isAuthorized){        // logged in and ready
         
         [UIView animateWithDuration:animDuration
@@ -168,6 +162,7 @@
                          completion:nil];
 
     }
+ */
 }
 
 - (void) addTask:(void(^)(NSDictionary* userDict))taskBlock forID:(NSString*)connectionID
@@ -214,27 +209,8 @@
     DLog(@"Twitter OAuth Connection failed.");
 }
 
-#pragma mark Twitter OAuth Delegate Methods
-
-- (void) OAuthTwitterController: (SA_OAuthTwitterController *) controller authenticatedWithUsername: (NSString *) username
-{
-    [self refreshButtonState];
-    [self performSegueWithIdentifier:@"viewFollowers" sender:self];
-}
-
-- (void) OAuthTwitterControllerFailed: (SA_OAuthTwitterController *) controller;
-{
-    [self.twEngine clearAccessToken];
-    [self refreshButtonState];
-}
-
-- (void) OAuthTwitterControllerCanceled: (SA_OAuthTwitterController *) controller;
-{
-    [self.twEngine clearAccessToken];
-    [self refreshButtonState];
-}
-
 #pragma mark TwitterEngineDelegate
+/*
 - (void) requestSucceeded: (NSString *) requestIdentifier {
 	//DLog(@"Request %@ succeeded", requestIdentifier);
     
@@ -285,4 +261,5 @@
 {
     DLog(@"image received for connection ID: %@", connectionIdentifier);
 }
+*/
 @end

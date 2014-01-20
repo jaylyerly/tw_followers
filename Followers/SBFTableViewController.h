@@ -7,13 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-@class SA_OAuthTwitterEngine;
 @class SBFViewController;
 
 @interface SBFTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSString *username;
-@property (strong, nonatomic) SA_OAuthTwitterEngine *twEngine;
 @property (strong, nonatomic) SBFViewController *rootViewController;
 @property (nonatomic) NSUInteger stackLevel;
 

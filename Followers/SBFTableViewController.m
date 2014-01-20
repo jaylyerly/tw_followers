@@ -8,7 +8,6 @@
 
 #import "SBFTableViewController.h"
 #import "SBFTwitterUser.h"
-#import "SA_OAuthTwitterEngine.h"
 #import "SBFViewController.h"
 #import "SBFUserInfoViewController.h"
 
@@ -170,7 +169,7 @@
                 cell.textLabel.text = @"Loading...";
                 cell.detailTextLabel.text = @"...";
                 cell.imageView.image = [UIImage imageNamed:@"twitter"];
-                self.userInfoConnectionID = [self.twEngine getUserInformationFor:self.username];
+                //self.userInfoConnectionID = [self.twEngine getUserInformationFor:self.username];
                 void (^theBlock)(NSDictionary*)=^void(NSDictionary *userDict){
                     self.twitterUser = [[SBFTwitterUser alloc] initWithDictionary:userDict];
                     if (self.twitterUser.followers_count == 0){
@@ -223,7 +222,7 @@
     DLog(@"requesting followers with cursor: %@", self.cursor);
     if ([self.cursorList containsObject:self.cursor]) { return; } // bail if we've already requested this cursor
     [self.cursorList addObject:self.cursor];
-    self.followersConnectionID = [self.twEngine getFollowersIncludingCurrentStatus:NO forScreenName:self.username withCursor:self.cursor];
+    //self.followersConnectionID = [self.twEngine getFollowersIncludingCurrentStatus:NO forScreenName:self.username withCursor:self.cursor];
     void (^theBlock)(NSDictionary*)=^void(NSDictionary *userDict){
         // see if there's a cursor value pointing to another page
         NSString* next_cursor = [userDict objectForKey:@"next_cursor"];
@@ -288,7 +287,7 @@
     
     SBFTableViewController* subView = [[SBFTableViewController alloc] init];
     subView.username = twUser.username;
-    subView.twEngine = self.twEngine;
+    //subView.twEngine = self.twEngine;
     subView.rootViewController = self.rootViewController;
     subView.stackLevel = self.stackLevel + 1;
     [self.navigationController pushViewController:subView animated:YES];
