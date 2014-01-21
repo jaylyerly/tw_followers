@@ -18,7 +18,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jwa-CY-j3W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="309" y="-604"/>
+            <point key="canvasLocation" x="97" y="-828"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="55H-q9-OIi">
@@ -28,12 +28,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="2" kind="relationship" relationship="rootViewController" id="4pg-gM-jj3"/>
+                        <segue destination="o3o-Kp-ZNR" kind="relationship" relationship="rootViewController" id="gx6-7l-n0J"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8a-IF-TYt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-708" y="-612"/>
+            <point key="canvasLocation" x="-588" y="-772"/>
         </scene>
         <!--View Controller - Account-->
         <scene sceneID="5">
@@ -145,7 +145,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-208" y="-604"/>
+            <point key="canvasLocation" x="-128" y="72"/>
         </scene>
     </scenes>
     <resources>
@@ -156,4 +156,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="gx6-7l-n0J"/>
+    </inferredMetricsTieBreakers>
 </document>

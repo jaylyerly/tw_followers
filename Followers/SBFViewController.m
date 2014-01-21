@@ -52,13 +52,13 @@
     DLog(@"viewWillAppear");
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    if (self.jumpToFollowers){
-        self.jumpToFollowers = NO;
-        [self performSegueWithIdentifier:@"viewFollowers" sender:self];
-    }
-}
+//-(void)viewDidAppear:(BOOL)animated
+//{
+//    if (self.jumpToFollowers){
+//        self.jumpToFollowers = NO;
+//        [self performSegueWithIdentifier:@"viewFollowers" sender:self];
+//    }
+//}
 
 - (void)didReceiveMemoryWarning
 {
@@ -103,7 +103,7 @@
         //tableView.username = @"TheEllenShow";  
 //        tableView.twEngine = self.twEngine;
         tableView.stackLevel = 0;
-        tableView.rootViewController = self;
+//        tableView.rootViewController = self;
     }
 }
 

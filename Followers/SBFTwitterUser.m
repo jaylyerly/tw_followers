@@ -40,7 +40,10 @@ static NSOperationQueue* _queue = nil;       // make a single queue for the whol
         _twDescription = userDict[@"description"];
         _avatar = nil;
         _avatarUrl = [NSURL URLWithString:userDict[@"profile_image_url"]];
-        _url = [NSURL URLWithString:userDict[@"url"]];
+        NSString *url = userDict[@"url"];
+        if (url && ![url isEqual:[NSNull null]]){
+            _url = [NSURL URLWithString:userDict[@"url"]];
+        }
         _followers_count = [(NSString*)userDict[@"followers_count"] integerValue];
         _status_count = [(NSString*)userDict[@"statuses_count"] integerValue];
         
@@ -54,6 +57,7 @@ static NSOperationQueue* _queue = nil;       // make a single queue for the whol
         NSString* replyToID = userDict[@"status"][@"in_reply_to_status_id"];
         NSString* theID = nil;
         // this bit seems hokey
+        /*
         if ([replyToID isEqualToString:@""]){
             theID = lastID;
         }else{
@@ -61,37 +65,46 @@ static NSOperationQueue* _queue = nil;       // make a single queue for the whol
         }
         
         theID = lastID;
-        
+        */
         _lastTweetURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://twitter.com/%@/status/%@", _username, lastID]];
         
         _tmpImgData = nil;
         NSURLRequest *request = [NSURLRequest requestWithURL:_avatarUrl];
-        NSURLConnection *connection = [[NSURLConnection alloc]
-                                        initWithRequest:request
-                                        delegate:self
-                                        startImmediately:NO];
-        [connection scheduleInRunLoop:[NSRunLoop currentRunLoop]
-                              forMode:NSRunLoopCommonModes];
-        [connection start];
+        
+        
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:[SBFTwitterUser sharedQueue]
+                               completionHandler:^(NSURLResponse* resp, NSData* data, NSError* err){
+                                   if (data){
+                                       [self addAvatarWithRoundedCorners:[UIImage imageWithData:data]];
+                                   }
+                               }];
+//        NSURLConnection *connection = [[NSURLConnection alloc]
+//                                        initWithRequest:request
+//                                        delegate:self
+//                                        startImmediately:NO];
+//        [connection scheduleInRunLoop:[NSRunLoop mainRunLoop]
+//                              forMode:NSRunLoopCommonModes];
+//        [connection start];
         
     }
     return self;
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    if (self.tmpImgData == nil){
-        self.tmpImgData = [NSMutableData data];
-    }
-    [self.tmpImgData appendData:data];
-        
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection*)theConnection
-{
-    //self.avatar = [UIImage imageWithData:self.tmpImgData];                        // sharp corners - Ouch!
-    [self addAvatarWithRoundedCorners:[UIImage imageWithData:self.tmpImgData]];     // friendly rounded corners
-}
+//- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+//{
+//    if (self.tmpImgData == nil){
+//        self.tmpImgData = [NSMutableData data];
+//    }
+//    [self.tmpImgData appendData:data];
+//        
+//}
+//
+//- (void)connectionDidFinishLoading:(NSURLConnection*)theConnection
+//{
+//    //self.avatar = [UIImage imageWithData:self.tmpImgData];                        // sharp corners - Ouch!
+//    [self addAvatarWithRoundedCorners:[UIImage imageWithData:self.tmpImgData]];     // friendly rounded corners
+//}
 
 - (void)addAvatarWithRoundedCorners:(UIImage *)newAvatar
 {

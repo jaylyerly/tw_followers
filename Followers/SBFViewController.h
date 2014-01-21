@@ -10,8 +10,5 @@
 
 @interface SBFViewController : UIViewController
 
-@property (nonatomic) BOOL jumpToFollowers;
-
-- (void) addTask:(void(^)(NSDictionary* userDict))taskBlock forID:(NSString*)connectionID;
 
 @end

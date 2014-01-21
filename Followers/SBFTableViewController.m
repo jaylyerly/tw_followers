@@ -10,13 +10,12 @@
 #import "SBFTwitterUser.h"
 #import "SBFViewController.h"
 #import "SBFUserInfoViewController.h"
+#import "SBFTwitterManager.h"
 
 @interface SBFTableViewController ()
 
 @property (strong, nonatomic) SBFTwitterUser *twitterUser;
 @property (strong, nonatomic) NSMutableArray *followers;
-@property (strong, nonatomic) NSString *userInfoConnectionID;
-@property (strong, nonatomic) NSString *followersConnectionID;
 @property (strong, nonatomic) NSString *cursor;
 @property (strong, nonatomic) NSMutableArray *cursorList;
 @property (strong, nonatomic) SBFUserInfoViewController* userInfoViewController;
@@ -26,11 +25,19 @@
 
 @implementation SBFTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (instancetype)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        [self initialSetup];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self){
+        [self initialSetup];
     }
     return self;
 }
@@ -39,17 +46,13 @@
 {
     self.twitterUser = nil;
     self.followers = nil;
-    self.followersConnectionID = nil;
-    self.userInfoConnectionID = nil;
     self.cursor = @"-1";
-    self.cursorList = [NSMutableArray array];
+    self.cursorList = nil;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    [self initialSetup];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"TableViewCells" bundle:nil] forCellReuseIdentifier:@"Cell"];
     [self.tableView registerNib:[UINib nibWithNibName:@"LoadingTableViewCells" bundle:nil] forCellReuseIdentifier:@"Loading"];
@@ -78,17 +81,18 @@
     self.title = [NSString stringWithFormat:@"@%@",self.username];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSString *)username {
+    if (_username){
+        return _username;
+    }
+    return [SBFTwitterManager sharedManager].defaultUsername;
 }
 
 #pragma mark - IBActions
 
 -(IBAction)popToHome:(id)sender
 {
-    self.rootViewController.jumpToFollowers = YES;
+    //self.rootViewController.jumpToFollowers = YES;
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
@@ -100,18 +104,24 @@
     [self.tableView reloadData];
 }
 
--(void)addFollower:(SBFTwitterUser*)twUser
+-(void)addFollowers:(NSArray *)twUsers
 {
     //DLog(@"addFollower");
     if (self.followers == nil) {
         self.followers = [NSMutableArray array];
     }
-    [self.followers addObject:twUser];
+    [self.followers addObjectsFromArray:twUsers];
 }
 
 -(BOOL)isFinishedLoadingFollowers
 {
     return [self.followers count] == self.twitterUser.followers_count;
+}
+
+-(void) reloadOnMainThread {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
 }
 
 #pragma mark - Table view data source
@@ -165,6 +175,20 @@
             cell.detailTextLabel.text = self.twitterUser.name;
             cell.imageView.image = self.twitterUser.avatar;
         }else{
+            cell.textLabel.text = @"Loading...";
+            cell.detailTextLabel.text = @"...";
+            cell.imageView.image = [UIImage imageNamed:@"twitter"];
+            SBFTwitterManager *mgr = [SBFTwitterManager sharedManager];
+            [mgr fetchInfoForUser:self.username completionBlock:^(SBFTwitterUser *user){
+                self.twitterUser = user;
+                [self.twitterUser addObserver:self
+                                   forKeyPath:@"avatar"
+                                      options:NSKeyValueObservingOptionNew
+                                      context:nil];
+                [self reloadOnMainThread];
+            }];
+            
+/*
             if (self.userInfoConnectionID == nil){      // don't send request again if we've already sent one
                 cell.textLabel.text = @"Loading...";
                 cell.detailTextLabel.text = @"...";
@@ -178,12 +202,14 @@
                     }
                     [self.tableView reloadData];
                 };
-                if (self.userInfoConnectionID){
-                    [self.rootViewController addTask:theBlock forID:self.userInfoConnectionID];
-                }else{
-                    DLog(@"UserInfoConnectionID is nil in SFTableViewController!");
-                }
+//                if (self.userInfoConnectionID){
+//                    [self.rootViewController addTask:theBlock forID:self.userInfoConnectionID];
+//                }else{
+//                    DLog(@"UserInfoConnectionID is nil in SFTableViewController!");
+//                }
+
             }
+*/
         }
     }else{      // followers section
         NSInteger row = [indexPath row];
@@ -204,12 +230,19 @@
                     cell.imageView.image = follower.avatar;
                 }
             }else{
-                //if (self.followersConnectionID == nil){
-                    cell.textLabel.text = @"Loading...";
-                    cell.detailTextLabel.text = @"...";
-                    cell.imageView.image = [UIImage imageNamed:@"twitter"];
-                    [self requestFollowerData];
-                //}
+                cell.textLabel.text = @"Loading...";
+                cell.detailTextLabel.text = @"...";
+                cell.imageView.image = [UIImage imageNamed:@"twitter"];
+                [self requestFollowerData];
+                /*
+                [[SBFTwitterManager sharedManager] fetchFollowersForUser:self.username
+                                                                  cursor:nil
+                                                         completionBlock:^(NSArray *friends, NSString *next_cursor){
+                                                             self.followers = [NSMutableArray arrayWithArray:friends];
+                                                             self.cursor = next_cursor;
+                                                             [self reloadOnMainThread];
+                                                         }];
+                 */
             }
         }
     }
@@ -219,6 +252,24 @@
 
 - (void)requestFollowerData
 {
+    if (![self.cursor isEqualToString:@"0"] && ![self.cursorList containsObject:self.cursor ]){
+        [[SBFTwitterManager sharedManager] fetchFollowersForUser:self.username
+                                                          cursor:self.cursor
+                                                 completionBlock:^(NSArray *friends, NSString *next_cursor){
+                                                     [self addFollowers:friends];
+                                                     self.cursor = next_cursor;
+                                                     [self.cursorList addObject:self.cursor];
+                                                     for (SBFTwitterUser *twUser in friends){
+                                                         [twUser addObserver:self
+                                                                  forKeyPath:@"avatar"
+                                                                     options:NSKeyValueObservingOptionNew
+                                                                     context:nil];
+                                                     }
+                                                     [self reloadOnMainThread];
+                                                 }];
+    }
+    
+    /*
     DLog(@"requesting followers with cursor: %@", self.cursor);
     if ([self.cursorList containsObject:self.cursor]) { return; } // bail if we've already requested this cursor
     [self.cursorList addObject:self.cursor];
@@ -239,22 +290,14 @@
                     context:nil];
         [self.tableView reloadData];
     };
-    if (self.followersConnectionID){
-        [self.rootViewController addTask:theBlock forID:self.followersConnectionID];
-    }else{
-        DLog(@"FollowersConnectionID is nil in SFTableViewController!");
-    }
-
+     */
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    // The objects here are twUsers that got their avatar updated.
-    //DLog(@"got observed change for %@ on %@", keyPath, object);
-    
-    [self.tableView reloadData];
+    NSLog(@"removing observer for %@", object);
     [object removeObserver:self forKeyPath:keyPath];       // remove observer, these only update once
-
+    [self reloadOnMainThread];
     return;
 }
 
@@ -288,7 +331,7 @@
     SBFTableViewController* subView = [[SBFTableViewController alloc] init];
     subView.username = twUser.username;
     //subView.twEngine = self.twEngine;
-    subView.rootViewController = self.rootViewController;
+    //subView.rootViewController = self.rootViewController;
     subView.stackLevel = self.stackLevel + 1;
     [self.navigationController pushViewController:subView animated:YES];
 }

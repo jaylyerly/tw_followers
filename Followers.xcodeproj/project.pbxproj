@@ -19,6 +19,7 @@
 		EC15EE84188C8B2200D948D1 /* SBFTwitterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC15EE83188C8B2200D948D1 /* SBFTwitterManager.m */; };
 		EC15EE86188D73B500D948D1 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC15EE85188D73B500D948D1 /* Accounts.framework */; };
 		EC15EE88188D73C300D948D1 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC15EE87188D73C300D948D1 /* Social.framework */; };
+		EC15EE8B188DFF2900D948D1 /* SBFAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = EC15EE8A188DFF2900D948D1 /* SBFAlertManager.m */; };
 		EC549AE3166E4AF8004C4009 /* SBFTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EC549AE2166E4AF8004C4009 /* SBFTableViewController.m */; };
 		EC549AE6166E86B7004C4009 /* SBFTwitterUser.m in Sources */ = {isa = PBXBuildFile; fileRef = EC549AE5166E86B7004C4009 /* SBFTwitterUser.m */; };
 		EC549AE8166ED321004C4009 /* TableViewCells.xib in Resources */ = {isa = PBXBuildFile; fileRef = EC549AE7166ED321004C4009 /* TableViewCells.xib */; };
@@ -68,6 +69,8 @@
 		EC15EE83188C8B2200D948D1 /* SBFTwitterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFTwitterManager.m; sourceTree = "<group>"; };
 		EC15EE85188D73B500D948D1 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		EC15EE87188D73C300D948D1 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		EC15EE89188DFF2900D948D1 /* SBFAlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFAlertManager.h; sourceTree = "<group>"; };
+		EC15EE8A188DFF2900D948D1 /* SBFAlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFAlertManager.m; sourceTree = "<group>"; };
 		EC549AE1166E4AF8004C4009 /* SBFTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFTableViewController.h; sourceTree = "<group>"; };
 		EC549AE2166E4AF8004C4009 /* SBFTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFTableViewController.m; sourceTree = "<group>"; };
 		EC549AE4166E86B7004C4009 /* SBFTwitterUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBFTwitterUser.h; sourceTree = "<group>"; };
@@ -210,6 +213,8 @@
 				EC549AEC1670086D004C4009 /* SBFUserInfoViewController.m */,
 				EC15EE82188C8B2200D948D1 /* SBFTwitterManager.h */,
 				EC15EE83188C8B2200D948D1 /* SBFTwitterManager.m */,
+				EC15EE89188DFF2900D948D1 /* SBFAlertManager.h */,
+				EC15EE8A188DFF2900D948D1 /* SBFAlertManager.m */,
 				ECB66540166D4F7D0086F91E /* Supporting Files */,
 				ECB66560166D53120086F91E /* 3rd Party */,
 			);
@@ -362,6 +367,7 @@
 			files = (
 				ECB66546166D4F7D0086F91E /* main.m in Sources */,
 				ECB6654A166D4F7D0086F91E /* SBFAppDelegate.m in Sources */,
+				EC15EE8B188DFF2900D948D1 /* SBFAlertManager.m in Sources */,
 				ECB66556166D4F7D0086F91E /* SBFViewController.m in Sources */,
 				EC15EE84188C8B2200D948D1 /* SBFTwitterManager.m in Sources */,
 				EC15EE7E188B381000D948D1 /* GTMCodeCoverageApp.m in Sources */,
@@ -502,6 +508,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -525,6 +532,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

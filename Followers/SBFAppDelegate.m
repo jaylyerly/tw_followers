@@ -13,10 +13,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[SBFTwitterManager sharedManager] fetchFollowersForUser:@"jaylyerly" cursor:nil completionBlock:^(NSDictionary *users, NSString *cursor){
-        NSLog(@"Next cursor: %@", cursor);
-        NSLog(@"users: %@", users);
-    }];
+//    [[SBFTwitterManager sharedManager] fetchFollowersForUser:@"jaylyerly" cursor:nil completionBlock:^(NSArray *users, NSString *cursor){
+//        NSLog(@"Next cursor: %@", cursor);
+//        NSLog(@"users: %@", users);
+//    }];
     return YES;
 }
 							
