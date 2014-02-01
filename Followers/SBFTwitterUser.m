@@ -30,7 +30,7 @@ static NSOperationQueue* _queue = nil;       // make a single queue for the whol
 
 @implementation SBFTwitterUser
 
--(id) initWithDictionary:(NSDictionary*)userDict
+-(instancetype) initWithDictionary:(NSDictionary*)userDict
 {
     self = [super init];
     if (self) {

@@ -11,8 +11,6 @@
 
 @interface SBFTableViewController : UITableViewController
 
-@property (strong, nonatomic) NSString *username;
-//@property (strong, nonatomic) SBFViewController *rootViewController;
-@property (nonatomic) NSUInteger stackLevel;
+@property (copy, nonatomic) NSString *username;
 
 @end

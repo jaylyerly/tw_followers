@@ -8,15 +8,17 @@
 
 #import "SBFTableViewController.h"
 #import "SBFTwitterUser.h"
-#import "SBFViewController.h"
 #import "SBFUserInfoViewController.h"
 #import "SBFTwitterManager.h"
 
+static const NSUInteger kSBFTableViewCellHeight = 60;
+
 @interface SBFTableViewController ()
 
+@property (nonatomic) NSUInteger stackLevel;
 @property (strong, nonatomic) SBFTwitterUser *twitterUser;
 @property (strong, nonatomic) NSMutableArray *followers;
-@property (strong, nonatomic) NSString *cursor;
+@property (copy,   nonatomic) NSString *cursor;
 @property (strong, nonatomic) NSMutableArray *cursorList;
 @property (strong, nonatomic) SBFUserInfoViewController* userInfoViewController;
 @property (readonly) BOOL isFinishedLoadingFollowers;
@@ -170,7 +172,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60;
+    return kSBFTableViewCellHeight;
 }
 
 

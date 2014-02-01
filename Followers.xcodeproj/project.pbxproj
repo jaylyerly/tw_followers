@@ -40,7 +40,6 @@
 		ECB6654E166D4F7D0086F91E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB6654D166D4F7D0086F91E /* Default@2x.png */; };
 		ECB66550166D4F7D0086F91E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB6654F166D4F7D0086F91E /* Default-568h@2x.png */; };
 		ECB66553166D4F7D0086F91E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECB66551166D4F7D0086F91E /* MainStoryboard.storyboard */; };
-		ECB66556166D4F7D0086F91E /* SBFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECB66555166D4F7D0086F91E /* SBFViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		ECB665AB166D53F00086F91E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB665AA166D53F00086F91E /* libxml2.dylib */; };
 /* End PBXBuildFile section */
 
@@ -98,8 +97,6 @@
 		ECB6654D166D4F7D0086F91E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		ECB6654F166D4F7D0086F91E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		ECB66552166D4F7D0086F91E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		ECB66554166D4F7D0086F91E /* SBFViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBFViewController.h; sourceTree = "<group>"; };
-		ECB66555166D4F7D0086F91E /* SBFViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBFViewController.m; sourceTree = "<group>"; };
 		ECB665AA166D53F00086F91E /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -203,8 +200,6 @@
 				EC549AE7166ED321004C4009 /* TableViewCells.xib */,
 				EC549B03167240E5004C4009 /* LoadingTableViewCells.xib */,
 				EC549AE9167007DC004C4009 /* UserInfo.storyboard */,
-				ECB66554166D4F7D0086F91E /* SBFViewController.h */,
-				ECB66555166D4F7D0086F91E /* SBFViewController.m */,
 				EC549AE1166E4AF8004C4009 /* SBFTableViewController.h */,
 				EC549AE2166E4AF8004C4009 /* SBFTableViewController.m */,
 				EC549AE4166E86B7004C4009 /* SBFTwitterUser.h */,
@@ -368,7 +363,6 @@
 				ECB66546166D4F7D0086F91E /* main.m in Sources */,
 				ECB6654A166D4F7D0086F91E /* SBFAppDelegate.m in Sources */,
 				EC15EE8B188DFF2900D948D1 /* SBFAlertManager.m in Sources */,
-				ECB66556166D4F7D0086F91E /* SBFViewController.m in Sources */,
 				EC15EE84188C8B2200D948D1 /* SBFTwitterManager.m in Sources */,
 				EC15EE7E188B381000D948D1 /* GTMCodeCoverageApp.m in Sources */,
 				EC549AE3166E4AF8004C4009 /* SBFTableViewController.m in Sources */,

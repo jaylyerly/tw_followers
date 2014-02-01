@@ -20,9 +20,8 @@
 @property (readonly, strong, nonatomic) UIImage* avatar;
 @property (readonly) NSUInteger followers_count;
 @property (readonly) NSUInteger status_count;
-@property (readwrite) NSUInteger listIndex;
 
--(id) initWithDictionary:(NSDictionary*)userDict;
+- (instancetype) initWithDictionary:(NSDictionary*)userDict;
 - (NSComparisonResult)compareUserName:(SBFTwitterUser *)otherUser;
 - (NSComparisonResult)compareName:(SBFTwitterUser *)otherUser;
 
