@@ -52,9 +52,113 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
                 params:(NSDictionary *)params
              onSuccess:(SBFTwitterRequestSuccess)successBlock
                onError:(SBFTwitterRequestError)errorBlock {
+    if ([self userHasAccessToTwitter]) {
+        
+        ACAccountType *twitterAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+        
+        [self.accountStore requestAccessToAccountsWithType:twitterAccountType
+                                                   options:NULL
+                                                completion:^(BOOL granted, NSError *error) {
+
+                                                    
+            if (granted) {
+                NSArray *twitterAccounts = [self.accountStore accountsWithAccountType:twitterAccountType];
+                
+                SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                        requestMethod:SLRequestMethodGET
+                                                                  URL:url
+                                                           parameters:params];
+                
+                //  Attach an account to the request
+                [request setAccount:[twitterAccounts lastObject]];
+                
+                [request performRequestWithHandler: ^(NSData *responseData, NSHTTPURLResponse *urlResponse,  NSError *error) {
+                    if (responseData) {
+                        if (urlResponse.statusCode >= 200 && urlResponse.statusCode < 300) {
+                            NSError *jsonError;
+                            NSDictionary *returnDict =  [NSJSONSerialization JSONObjectWithData:responseData
+                                                                                        options:NSJSONReadingAllowFragments
+                                                                                          error:&jsonError];
+                            if (returnDict) {
+                                successBlock(returnDict);
+                            }
+                            else {
+                                // Our JSON deserialization went awry
+                                NSLog(@"JSON Error: %@", [jsonError localizedDescription]);
+                            }
+                        }
+                        else {
+                            if (errorBlock){
+                                errorBlock(urlResponse, error);
+                            } else {
+                                // The server did not respond ... were we rate-limited?
+                                [self handleRateLimit:urlResponse];
+                            }
+                        }
+                    }
+                }];
+            } else {
+                // Access was not granted, or an error occurred
+                NSLog(@"%@", [error localizedDescription]);
+            }
+                                                
+            }];
+    } else {
+        // No access to twitter -- ie, no account
+        [[SBFAlertManager sharedManager] displayAlertTitle:@"No Twitter Access"
+                                                   message:@"Did you configure your Twitter accounts in the system settings?"];
+    }
+}
+
+- (void) handleRateLimit:(NSHTTPURLResponse *)urlResponse{
+    NSLog(@"The response status code is %d", urlResponse.statusCode);
+    NSDictionary *headers = [urlResponse allHeaderFields];
+    NSLog(@"headers: %@", headers);
+    
+    if (urlResponse.statusCode == 429){
+        NSInteger reset = [(NSString *)headers[@"x-rate-limit-reset"] integerValue];
+        NSDate *resetDate = [NSDate dateWithTimeIntervalSince1970:reset];
+        NSLog(@"Current time is %@", [NSDate date]);
+        NSLog(@"Rate limit reset at %@", resetDate);
+        NSInteger minutes = floor([resetDate timeIntervalSinceNow] / 60);
+        NSInteger seconds = ((int)[resetDate timeIntervalSinceNow]) % 60;
+        NSLog(@"Rate limit reset in %02d:%02d ", minutes, seconds);
+        NSString *msg = [NSString stringWithFormat:@"Rate limit reset in\n%02d:%02d minutes", minutes, seconds];
+        NSString *title = @"Uh-oh!  Twitter API rate limit exceeded";
+        [[SBFAlertManager sharedManager] displayAlertTitle:title message:msg];
+    }
+}
+
+- (void)fetchFollowersForUser:(NSString *)username cursor:(NSString *)cursor completionBlock:(SBFTwitterFriendBlock)completionBlock {
+    NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/1.1/followers/list.json"];
+
+    NSDictionary *params = @{
+                             @"screen_name"            : username,
+                             @"skip_status"            : @"1",
+                             @"count"                  : @"50",
+                             @"include_user_entities"  : @"false",
+                             @"cursor"                 : cursor ?: @"-1",   // if cursor is nil, default to -1
+                             };
+
+    SBFTwitterRequestSuccess successBlock = ^(NSDictionary* returnDict) {
+        
+        NSArray *users = returnDict[@"users"] ?: @{};
+        NSString *cursorString = returnDict[@"next_cursor_str"];
+        
+        NSMutableArray *twUsers = [NSMutableArray array];
+        for (NSDictionary *userDict in users){
+            SBFTwitterUser *tu = [[SBFTwitterUser alloc] initWithDictionary:userDict];
+            [twUsers addObject:tu];
+        }
+        completionBlock([NSArray arrayWithArray:twUsers], cursorString);
+        
+    };
+
+    [self twitterRequest:url params:params onSuccess:successBlock onError:nil];
     
 }
 
+/*
 - (void)fetchFollowersForUser:(NSString *)username cursor:(NSString *)cursor completionBlock:(SBFTwitterFriendBlock)completionBlock {
     if ([self userHasAccessToTwitter]) {
         
@@ -139,7 +243,8 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
                                                    message:@"Did you configure your Twitter accounts in the system settings?"];
     }
 }
-
+*/
+    
 - (void)fetchTimelineForUser:(NSString *)username
 {
     //  Step 0: Check that the user has local Twitter accounts
