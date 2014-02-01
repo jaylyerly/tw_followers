@@ -115,11 +115,10 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
 
 -(void)addFollowers:(NSArray *)twUsers
 {
-    //DLog(@"addFollower");
     if (self.followers == nil) {
         self.followers = [NSMutableArray array];
     }
-    [self.followers addObjectsFromArray:twUsers];    
+    [self.followers addObjectsFromArray:twUsers];
 }
 
 -(BOOL)isFinishedLoadingFollowers
@@ -157,13 +156,6 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
     if ([self.followers count] == 0) {return 1;}   // no data loaded yet
 
     return [self.followers count];
-    
-    // If all the followers aren't loaded, add an extra cell for the Loading... text
-//    if (self.isFinishedLoadingFollowers){
-//        return [self.followers count];
-//    } else {
-//        return [self.followers count] + 1;
-//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -199,28 +191,23 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
         }
     }else{      // followers section
         NSInteger row = [indexPath row];
-        
-//        if (row == [self.followers count] && row != 0){  // this is the extra cell for 'Loading....'
-//            return [tableView dequeueReusableCellWithIdentifier:@"Loading" forIndexPath:indexPath];
-//        }else{
-            if (self.followers){
-                if ([self.followers count] == 0){
-                    cell.textLabel.text = @"No followers yet...";
-                    cell.detailTextLabel.text = @"";
-                    cell.imageView.image = nil;
-                }else{
-                    SBFTwitterUser* follower = self.followers[row];
-                    cell.textLabel.text = [NSString stringWithFormat:@"@%@",follower.username];
-                    cell.detailTextLabel.text = follower.name;
-                    cell.imageView.image = follower.avatar;
-                }
+        if (self.followers){
+            if ([self.followers count] == 0){
+                cell.textLabel.text = @"No followers yet...";
+                cell.detailTextLabel.text = @"";
+                cell.imageView.image = nil;
             }else{
-                cell.textLabel.text = @"Loading...";
-                cell.detailTextLabel.text = @"...";
-                cell.imageView.image = [UIImage imageNamed:@"twitter"];
-                [self requestFollowerData];
+                SBFTwitterUser* follower = self.followers[row];
+                cell.textLabel.text = [NSString stringWithFormat:@"@%@",follower.username];
+                cell.detailTextLabel.text = follower.name;
+                cell.imageView.image = follower.avatar;
             }
-//        }
+        }else{
+            cell.textLabel.text = @"Loading...";
+            cell.detailTextLabel.text = @"...";
+            cell.imageView.image = [UIImage imageNamed:@"twitter"];
+            [self requestFollowerData];
+        }
     }
     
     return cell;
@@ -295,10 +282,11 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    // Request more data if the user scrolls to the bottom of the list.
     CGFloat height = scrollView.frame.size.height;
     CGFloat contentYoffset = scrollView.contentOffset.y;
     CGFloat distanceFromBottom = scrollView.contentSize.height - contentYoffset;
-    if(distanceFromBottom < height) {
+    if(distanceFromBottom < 1.3 * height) {
         [self requestFollowerData];
     }
 }
