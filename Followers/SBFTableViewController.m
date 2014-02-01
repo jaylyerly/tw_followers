@@ -119,20 +119,7 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
     if (self.followers == nil) {
         self.followers = [NSMutableArray array];
     }
-    
-
-    // TODO: refactor using direct SBFTwitterUser comparision
-    __block NSMutableArray *names = [NSMutableArray array];
-    [self.followers enumerateObjectsUsingBlock:^(SBFTwitterUser *user, NSUInteger index, BOOL *stop){
-        [names addObject:user.name];
-    }];
-    
-    for (SBFTwitterUser *user in twUsers){
-        if (! [names containsObject:user.name]){
-            [self.followers addObject:user];
-        }
-    }
-    
+    [self.followers addObjectsFromArray:twUsers];    
 }
 
 -(BOOL)isFinishedLoadingFollowers
@@ -167,14 +154,16 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
 {
     if (section == kSBFTableViewSectionUserInfo) {return 1;}
     
-    if ([self.followers count] == 0) {return 1;}
+    if ([self.followers count] == 0) {return 1;}   // no data loaded yet
+
+    return [self.followers count];
     
     // If all the followers aren't loaded, add an extra cell for the Loading... text
-    if (self.isFinishedLoadingFollowers){
-        return [self.followers count];
-    } else {
-        return [self.followers count] + 1;
-    }
+//    if (self.isFinishedLoadingFollowers){
+//        return [self.followers count];
+//    } else {
+//        return [self.followers count] + 1;
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -211,17 +200,16 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
     }else{      // followers section
         NSInteger row = [indexPath row];
         
-        if (row == [self.followers count] && row != 0){  // this is the extra cell for 'Loading....'
-            return [tableView dequeueReusableCellWithIdentifier:@"Loading" forIndexPath:indexPath];
-        }else{
-            NSArray* fws = self.followers;
+//        if (row == [self.followers count] && row != 0){  // this is the extra cell for 'Loading....'
+//            return [tableView dequeueReusableCellWithIdentifier:@"Loading" forIndexPath:indexPath];
+//        }else{
             if (self.followers){
                 if ([self.followers count] == 0){
                     cell.textLabel.text = @"No followers yet...";
                     cell.detailTextLabel.text = @"";
                     cell.imageView.image = nil;
                 }else{
-                    SBFTwitterUser* follower = fws[row];
+                    SBFTwitterUser* follower = self.followers[row];
                     cell.textLabel.text = [NSString stringWithFormat:@"@%@",follower.username];
                     cell.detailTextLabel.text = follower.name;
                     cell.imageView.image = follower.avatar;
@@ -232,7 +220,7 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
                 cell.imageView.image = [UIImage imageNamed:@"twitter"];
                 [self requestFollowerData];
             }
-        }
+//        }
     }
     
     return cell;
@@ -258,6 +246,7 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
                                                  for (SBFTwitterUser *twUser in friends){
                                                      [self observerTwitterUser:twUser];
                                                  }
+                                                 DLog(@"Received %d friends from twitter.", [friends count]);
                                                  [self reloadOnMainThread];
                                              }];
     
@@ -289,15 +278,12 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
         return;
     }
     
-    // section == 1
     NSInteger row = [indexPath row];
 
     // bail if the followers list is empty or not yet initialized
     if ([self.followers count] == 0 || self.followers == nil) { cell.selected = NO; return; }
 
-    //NSArray* fws = [self.followers sortedArrayUsingSelector:@selector(compareUserName:)];
-    NSArray* fws = self.followers;
-    SBFTwitterUser *twUser = fws[row];
+    SBFTwitterUser *twUser = self.followers[row];
     
     SBFTableViewController* subView = [[SBFTableViewController alloc] init];
     subView.username = twUser.username;

@@ -12,7 +12,8 @@
 #import "SBFTwitterUser.h"
 #import "SBFAlertManager.h"
 
-static const NSString *twitterEndpoint = @"https://api.twitter.com/1.1";
+static const NSString   *SBFTwitterEndpoint = @"https://api.twitter.com/1.1";
+static const NSUInteger SBFTwitterBatchSize = 200;              // max size to lessen issues of rate limiting
 
 typedef void (^SBFTwitterRequestSuccess)(NSDictionary* returnDict);
 typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError *error);
@@ -131,18 +132,17 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
 }
 
 - (NSURL *)urlForPath:(NSString *)path {
-    NSString *urlString = [NSString stringWithFormat:@"%@/%@", twitterEndpoint, path];
+    NSString *urlString = [NSString stringWithFormat:@"%@/%@", SBFTwitterEndpoint, path];
     return [NSURL URLWithString:urlString];
 }
 
 - (void)fetchFollowersForUser:(NSString *)username cursor:(NSString *)cursor completionBlock:(SBFTwitterFriendBlock)completionBlock {
-    //NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/1.1/followers/list.json"];
     NSURL *url = [self urlForPath:@"followers/list.json"];
     
     NSDictionary *params = @{
                              @"screen_name"            : username,
                              @"skip_status"            : @"1",
-                             @"count"                  : @"50",
+                             @"count"                  : @(SBFTwitterBatchSize),
                              @"include_user_entities"  : @"false",
                              @"cursor"                 : cursor ?: @"-1",   // if cursor is nil, default to -1
                              };
