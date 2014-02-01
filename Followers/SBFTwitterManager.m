@@ -26,6 +26,11 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
 @implementation SBFTwitterManager
 
 +(SBFTwitterManager *)sharedManager {
+    // Disable Twitter API in test mode
+    if ([[[NSProcessInfo processInfo] environment] objectForKey:@"SBFUnitTestMode"]){
+        return nil;
+    }
+    
     static SBFTwitterManager *_manager = nil;
     static dispatch_once_t onceToken;
     
