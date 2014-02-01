@@ -56,18 +56,6 @@ static NSOperationQueue* _queue = nil;       // make a single queue for the whol
         _lastTweet = [_lastTweet stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
         
         NSString* lastID = userDict[@"status"][@"id"];
-        NSString* replyToID = userDict[@"status"][@"in_reply_to_status_id"];
-        NSString* theID = nil;
-        // this bit seems hokey
-        /*
-        if ([replyToID isEqualToString:@""]){
-            theID = lastID;
-        }else{
-            theID = replyToID;
-        }
-        
-        theID = lastID;
-        */
         _lastTweetURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://twitter.com/%@/status/%@", _username, lastID]];
         
         _tmpImgData = nil;

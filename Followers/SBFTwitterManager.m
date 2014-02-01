@@ -13,7 +13,7 @@
 #import "SBFAlertManager.h"
 
 static const NSString   *SBFTwitterEndpoint = @"https://api.twitter.com/1.1";
-static const NSUInteger SBFTwitterBatchSize = 200;              // max size to lessen issues of rate limiting
+static const NSString   *SBFTwitterBatchSize = @"200";              // max size to lessen issues of rate limiting
 
 typedef void (^SBFTwitterRequestSuccess)(NSDictionary* returnDict);
 typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError *error);
@@ -142,7 +142,7 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
     NSDictionary *params = @{
                              @"screen_name"            : username,
                              @"skip_status"            : @"1",
-                             @"count"                  : @(SBFTwitterBatchSize),
+                             @"count"                  : SBFTwitterBatchSize,
                              @"include_user_entities"  : @"false",
                              @"cursor"                 : cursor ?: @"-1",   // if cursor is nil, default to -1
                              };
