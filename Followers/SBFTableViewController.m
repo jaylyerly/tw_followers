@@ -142,6 +142,7 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
 
 -(void) reloadOnMainThread {
     dispatch_async(dispatch_get_main_queue(), ^{
+        NSLog(@"number of followers: %d", [self.followers count]);
         [self.tableView reloadData];
     });
 }
@@ -241,20 +242,24 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
 {
     DLog(@"requesting followers with cursor: %@", self.cursor);
     DLog(@"requesting followers with cursorlist: %@", self.cursorList);
-    if (![self.cursor isEqualToString:@"0"] && ![self.cursorList containsObject:self.cursor ]){
-        DLog(@"...launching request");
-        [[SBFTwitterManager sharedManager] fetchFollowersForUser:self.username
-                                                          cursor:self.cursor
-                                                 completionBlock:^(NSArray *friends, NSString *next_cursor){
-                                                     [self addFollowers:friends];
-                                                     self.cursor = next_cursor;
-                                                     [self.cursorList addObject:self.cursor];
-                                                     for (SBFTwitterUser *twUser in friends){
-                                                         [self observerTwitterUser:twUser];
-                                                     }
-                                                     [self reloadOnMainThread];
-                                                 }];
-    }
+
+    // bail on '0', this indicates there are no more pages.
+    if ([self.cursor isEqualToString:@"0"])           { return;}
+
+    // bail if we've already requested this page.
+    if ([self.cursorList containsObject:self.cursor]) { return;}
+
+    [self.cursorList addObject:self.cursor];
+    [[SBFTwitterManager sharedManager] fetchFollowersForUser:self.username
+                                                      cursor:self.cursor
+                                             completionBlock:^(NSArray *friends, NSString *next_cursor){
+                                                 [self addFollowers:friends];
+                                                 self.cursor = next_cursor;
+                                                 for (SBFTwitterUser *twUser in friends){
+                                                     [self observerTwitterUser:twUser];
+                                                 }
+                                                 [self reloadOnMainThread];
+                                             }];
     
 }
 
@@ -304,26 +309,11 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    // if the user scrolls to the bottom of the followers list and there is another batch of
-    // followers available, fire off another request, but be careful not to do it twice for
-    // the same cursor
-    if ( (![self.cursor isEqualToString:@"-1"]) &&          // -1 or 0 means there are no other pages
-            (![self.cursor isEqualToString:@"0"]) &&
-            (![self.cursorList containsObject:self.cursor])  // and we haven't retrieved this before
-        ){
-        CGFloat height = scrollView.frame.size.height;
-        
-        CGFloat contentYoffset = scrollView.contentOffset.y;
-        
-        CGFloat distanceFromBottom = scrollView.contentSize.height - contentYoffset;
-        //DLog(@"offset: %f", contentYoffset);
-        
-        if(distanceFromBottom < height)
-        {
-            // need to acquire more data
-            [self requestFollowerData];
-        }
+    CGFloat height = scrollView.frame.size.height;
+    CGFloat contentYoffset = scrollView.contentOffset.y;
+    CGFloat distanceFromBottom = scrollView.contentSize.height - contentYoffset;
+    if(distanceFromBottom < height) {
+        [self requestFollowerData];
     }
 }
-
 @end
