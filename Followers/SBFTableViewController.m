@@ -47,7 +47,7 @@
     self.twitterUser = nil;
     self.followers = nil;
     self.cursor = @"-1";
-    self.cursorList = nil;
+    self.cursorList = [NSMutableArray array];
 }
 
 - (void)viewDidLoad
@@ -110,7 +110,21 @@
     if (self.followers == nil) {
         self.followers = [NSMutableArray array];
     }
-    [self.followers addObjectsFromArray:twUsers];
+    //[self.followers addObjectsFromArray:twUsers];
+    
+
+    // TODO: refactor using direct SBFTwitterUser comparision
+    __block NSMutableArray *names = [NSMutableArray array];
+    [self.followers enumerateObjectsUsingBlock:^(SBFTwitterUser *user, NSUInteger index, BOOL *stop){
+        [names addObject:user.name];
+    }];
+    
+    for (SBFTwitterUser *user in twUsers){
+        if (! [names containsObject:user.name]){
+            [self.followers addObject:user];
+        }
+    }
+    
 }
 
 -(BOOL)isFinishedLoadingFollowers
@@ -252,7 +266,10 @@
 
 - (void)requestFollowerData
 {
+    DLog(@"requesting followers with cursor: %@", self.cursor);
+    DLog(@"requesting followers with cursorlist: %@", self.cursorList);
     if (![self.cursor isEqualToString:@"0"] && ![self.cursorList containsObject:self.cursor ]){
+        DLog(@"...launching request");
         [[SBFTwitterManager sharedManager] fetchFollowersForUser:self.username
                                                           cursor:self.cursor
                                                  completionBlock:^(NSArray *friends, NSString *next_cursor){
@@ -295,7 +312,6 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    NSLog(@"removing observer for %@", object);
     [object removeObserver:self forKeyPath:keyPath];       // remove observer, these only update once
     [self reloadOnMainThread];
     return;

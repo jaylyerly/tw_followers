@@ -45,8 +45,8 @@
             [[[UIAlertView alloc] initWithTitle:title
                                         message:msg
                                        delegate:self
-                              cancelButtonTitle:@"Cancel"
-                              otherButtonTitles:@"OK", nil] show];
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
         });
         return YES;
     }

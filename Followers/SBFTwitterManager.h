@@ -15,7 +15,6 @@ typedef void (^SBFTwitterInfoBlock)(SBFTwitterUser* user);
 @interface SBFTwitterManager : NSObject
 
 @property (nonatomic, readonly) NSString* defaultUsername;
-@property (nonatomic, readonly) NSString* defaultName;
 
 + (SBFTwitterManager *)sharedManager;
 //- (BOOL)userHasAccessToTwitter;

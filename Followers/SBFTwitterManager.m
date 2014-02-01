@@ -12,6 +12,9 @@
 #import "SBFTwitterUser.h"
 #import "SBFAlertManager.h"
 
+typedef void (^SBFTwitterRequestSuccess)(NSDictionary* returnDict);
+typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError *error);
+
 @interface SBFTwitterManager ()
 @property (nonatomic, strong) ACAccountStore *accountStore;
 @end
@@ -44,10 +47,18 @@
             isAvailableForServiceType:SLServiceTypeTwitter];
 }
 
+
+- (void)twitterRequest:(NSURL *)url
+                params:(NSDictionary *)params
+             onSuccess:(SBFTwitterRequestSuccess)successBlock
+               onError:(SBFTwitterRequestError)errorBlock {
+    
+}
+
 - (void)fetchFollowersForUser:(NSString *)username cursor:(NSString *)cursor completionBlock:(SBFTwitterFriendBlock)completionBlock {
     if ([self userHasAccessToTwitter]) {
         
-        ACAccountType *twitterAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier: ACAccountTypeIdentifierTwitter];
+        ACAccountType *twitterAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
         
         [self.accountStore requestAccessToAccountsWithType:twitterAccountType
                                                    options:NULL
@@ -122,6 +133,10 @@
                  NSLog(@"%@", [error localizedDescription]);
              }
          }];
+    } else {
+        // No access to twitter -- ie, no account
+        [[SBFAlertManager sharedManager] displayAlertTitle:@"No Twitter Access"
+                                                   message:@"Did you configure your Twitter accounts in the system settings?"];
     }
 }
 
@@ -259,12 +274,12 @@
 }
 
 
-- (NSString *)defaultName {
-    return @"Jay Lyerly";
-}
-
 - (NSString *)defaultUsername {
-    return @"jaylyerly";
+    ACAccountType *twitterAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+    ACAccount *twAccount = [[self.accountStore accountsWithAccountType:twitterAccountType] lastObject];
+    NSString *name = [NSString stringWithFormat:@"@%@", twAccount.username];   // prepend the @
+
+    return name;
 }
 @end
 
