@@ -81,32 +81,9 @@ static NSOperationQueue* _queue = nil;       // make a single queue for the whol
                                        [self addAvatarWithRoundedCorners:[UIImage imageWithData:data]];
                                    }
                                }];
-//        NSURLConnection *connection = [[NSURLConnection alloc]
-//                                        initWithRequest:request
-//                                        delegate:self
-//                                        startImmediately:NO];
-//        [connection scheduleInRunLoop:[NSRunLoop mainRunLoop]
-//                              forMode:NSRunLoopCommonModes];
-//        [connection start];
-        
     }
     return self;
 }
-
-//- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-//{
-//    if (self.tmpImgData == nil){
-//        self.tmpImgData = [NSMutableData data];
-//    }
-//    [self.tmpImgData appendData:data];
-//        
-//}
-//
-//- (void)connectionDidFinishLoading:(NSURLConnection*)theConnection
-//{
-//    //self.avatar = [UIImage imageWithData:self.tmpImgData];                        // sharp corners - Ouch!
-//    [self addAvatarWithRoundedCorners:[UIImage imageWithData:self.tmpImgData]];     // friendly rounded corners
-//}
 
 - (void)addAvatarWithRoundedCorners:(UIImage *)newAvatar
 {
