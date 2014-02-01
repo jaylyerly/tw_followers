@@ -11,12 +11,12 @@
 
 @interface SBFTwitterUser () <NSURLConnectionDataDelegate>
 
-@property (readwrite, strong, nonatomic) NSString* username;
-@property (readwrite, strong, nonatomic) NSString* name;
-@property (readwrite, strong, nonatomic) NSString* location;
-@property (readwrite, strong, nonatomic) NSString* twDescription;
+@property (readwrite, copy,   nonatomic) NSString* username;
+@property (readwrite, copy,   nonatomic) NSString* name;
+@property (readwrite, copy,   nonatomic) NSString* location;
+@property (readwrite, copy,   nonatomic) NSString* twDescription;
+@property (readwrite, copy,   nonatomic) NSString* lastTweet;
 @property (readwrite, strong, nonatomic) NSURL* url;
-@property (readwrite, strong, nonatomic) NSString* lastTweet;
 @property (readwrite, strong, nonatomic) NSURL* lastTweetURL;
 @property (readwrite, strong, nonatomic) UIImage* avatar;
 @property (readwrite, strong, nonatomic) NSURL* avatarUrl;
@@ -114,17 +114,22 @@ static NSOperationQueue* _queue = nil;       // make a single queue for the whol
     CGRect insetRect = CGRectInset(_bounds, 0, 0);
     CGRect offsetRect = insetRect; offsetRect.origin = CGPointZero;
     UIGraphicsBeginImageContext(insetRect.size);
+    
     CGContextRef imgContext = UIGraphicsGetCurrentContext();
-
-    CGPathRef clippingPath = [UIBezierPath bezierPathWithRoundedRect:offsetRect cornerRadius:10.0].CGPath;
-    CGContextAddPath(imgContext, clippingPath);
-    CGContextClip(imgContext);
-    // Draw the image
-    [newAvatar drawInRect:offsetRect];
-    // Get the image
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.avatar = img;
+    if (imgContext){
+        CGPathRef clippingPath = [UIBezierPath bezierPathWithRoundedRect:offsetRect cornerRadius:10.0].CGPath;
+        CGContextAddPath(imgContext, clippingPath);
+        CGContextClip(imgContext);
+        // Draw the image
+        [newAvatar drawInRect:offsetRect];
+        // Get the image
+        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        self.avatar = img;
+    }else{
+        // sometimes during a transition, UIGraphicsGetCurrentContext() fails
+        self.avatar = newAvatar;        
+    }
 }
 
 

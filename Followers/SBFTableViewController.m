@@ -13,6 +13,9 @@
 
 static const NSUInteger kSBFTableViewCellHeight = 60;
 
+static const NSUInteger kSBFTableViewSectionUserInfo = 0;
+static const NSUInteger kSBFTableViewSectionFollowers = 1;
+
 @interface SBFTableViewController ()
 
 @property (nonatomic) NSUInteger stackLevel;
@@ -149,7 +152,7 @@ static const NSUInteger kSBFTableViewCellHeight = 60;
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) { return @"User Info";}
+    if (section == kSBFTableViewSectionUserInfo) { return @"User Info";}
     if (self.followers){
         return [NSString stringWithFormat:@"Followers (%d of %d)", [self.followers count], self.twitterUser.followers_count ];
     }
@@ -158,7 +161,7 @@ static const NSUInteger kSBFTableViewCellHeight = 60;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {return 1;}
+    if (section == kSBFTableViewSectionUserInfo) {return 1;}
     
     if ([self.followers count] == 0) {return 1;}
     
@@ -185,7 +188,7 @@ static const NSUInteger kSBFTableViewCellHeight = 60;
     cell.detailTextLabel.text = @"";
     cell.textLabel.text = @"";
     
-    if ([indexPath section] == 0){  // user info section
+    if ([indexPath section] == kSBFTableViewSectionUserInfo){  // user info section
         if (self.twitterUser){
             cell.textLabel.text = [NSString stringWithFormat:@"@%@",self.twitterUser.username];
             cell.detailTextLabel.text = self.twitterUser.name;
@@ -328,7 +331,7 @@ static const NSUInteger kSBFTableViewCellHeight = 60;
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 
-    if ([indexPath section] == 0){
+    if ([indexPath section] == kSBFTableViewSectionUserInfo){
         //DLog(@"WJL -- > loading user info");
         if (self.twitterUser == nil) { cell.selected = NO; return; }  // bail if the user hasn't been loaded yet
         [self.userInfoViewController setupWithUser:self.twitterUser];

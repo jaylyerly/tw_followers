@@ -10,12 +10,12 @@
 
 @interface SBFTwitterUser : NSObject
 
-@property (readonly, strong, nonatomic) NSString* username;
-@property (readonly, strong, nonatomic) NSString* name;
-@property (readonly, strong, nonatomic) NSString* location;
-@property (readonly, strong, nonatomic) NSString* twDescription;
+@property (readonly, copy,   nonatomic) NSString* username;
+@property (readonly, copy,   nonatomic) NSString* name;
+@property (readonly, copy,   nonatomic) NSString* location;
+@property (readonly, copy,   nonatomic) NSString* twDescription;
+@property (readonly, copy,   nonatomic) NSString* lastTweet;
 @property (readonly, strong, nonatomic) NSURL* url;
-@property (readonly, strong, nonatomic) NSString* lastTweet;
 @property (readonly, strong, nonatomic) NSURL* lastTweetURL;
 @property (readonly, strong, nonatomic) UIImage* avatar;
 @property (readonly) NSUInteger followers_count;

@@ -18,7 +18,8 @@ typedef void (^SBFTwitterRequestSuccess)(NSDictionary* returnDict);
 typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError *error);
 
 @interface SBFTwitterManager ()
-@property (nonatomic, strong) ACAccountStore *accountStore;
+@property (nonatomic, strong)   ACAccountStore *accountStore;
+@property (nonatomic, readonly) ACAccount      *twitterAccount;
 @end
 
 @implementation SBFTwitterManager
@@ -63,16 +64,14 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
                                                 completion:^(BOOL granted, NSError *error) {
 
                                                     
-            if (granted) {
-                NSArray *twitterAccounts = [self.accountStore accountsWithAccountType:twitterAccountType];
-                
+            if (granted) {                
                 SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter
                                                         requestMethod:SLRequestMethodGET
                                                                   URL:url
                                                            parameters:params];
                 
                 //  Attach an account to the request
-                [request setAccount:[twitterAccounts lastObject]];
+                [request setAccount:self.twitterAccount];
                 
                 [request performRequestWithHandler: ^(NSData *responseData, NSHTTPURLResponse *urlResponse,  NSError *error) {
                     if (responseData) {
@@ -199,10 +198,14 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
     
 }
 
-- (NSString *)defaultUsername {
+- (ACAccount *)twitterAccount{
     ACAccountType *twitterAccountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     ACAccount *twAccount = [[self.accountStore accountsWithAccountType:twitterAccountType] lastObject];
-    return twAccount.username;
+    return twAccount;
+}
+
+- (NSString *)defaultUsername {
+    return self.twitterAccount.username;
 }
 @end
 
