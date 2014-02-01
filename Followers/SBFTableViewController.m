@@ -47,6 +47,10 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
     return self;
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)initialSetup
 {
     self.twitterUser = nil;
@@ -200,10 +204,7 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
             SBFTwitterManager *mgr = [SBFTwitterManager sharedManager];
             [mgr fetchInfoForUser:self.username completionBlock:^(SBFTwitterUser *user){
                 self.twitterUser = user;
-                [self.twitterUser addObserver:self
-                                   forKeyPath:@"avatar"
-                                      options:NSKeyValueObservingOptionNew
-                                      context:nil];
+                [self observerTwitterUser:user];
                 [self reloadOnMainThread];
             }];
             
@@ -282,10 +283,7 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
                                                      self.cursor = next_cursor;
                                                      [self.cursorList addObject:self.cursor];
                                                      for (SBFTwitterUser *twUser in friends){
-                                                         [twUser addObserver:self
-                                                                  forKeyPath:@"avatar"
-                                                                     options:NSKeyValueObservingOptionNew
-                                                                     context:nil];
+                                                         [self observerTwitterUser:twUser];
                                                      }
                                                      [self reloadOnMainThread];
                                                  }];
@@ -315,14 +313,23 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
      */
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    [object removeObserver:self forKeyPath:keyPath];       // remove observer, these only update once
-    [self reloadOnMainThread];
-    return;
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+//{
+//    [object removeObserver:self forKeyPath:keyPath];       // remove observer, these only update once
+//    [self reloadOnMainThread];
+//    return;
+//}
+
+- (void)observerTwitterUser:(SBFTwitterUser *)user {
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserverForName:SBFTwitterUserDidUpdateAvatarNotification
+                        object:user
+                         queue:nil
+                    usingBlock:^(NSNotification *notification)
+    {
+        [self reloadOnMainThread];
+    }];
 }
-
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

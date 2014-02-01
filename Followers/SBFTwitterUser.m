@@ -9,6 +9,8 @@
 #import "SBFTwitterUser.h"
 #import <CoreGraphics/CoreGraphics.h>
 
+NSString * const SBFTwitterUserDidUpdateAvatarNotification = @"SBFTwitterUserDidUpdateAvatarNotification";
+
 @interface SBFTwitterUser () <NSURLConnectionDataDelegate>
 
 @property (readwrite, copy,   nonatomic) NSString* username;
@@ -130,6 +132,7 @@ static NSOperationQueue* _queue = nil;       // make a single queue for the whol
         // sometimes during a transition, UIGraphicsGetCurrentContext() fails
         self.avatar = newAvatar;        
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:SBFTwitterUserDidUpdateAvatarNotification object:self];
 }
 
 

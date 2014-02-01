@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const SBFTwitterUserDidUpdateAvatarNotification;
+
 @interface SBFTwitterUser : NSObject
 
 @property (readonly, copy,   nonatomic) NSString* username;
