@@ -41,6 +41,11 @@
 		ECB66550166D4F7D0086F91E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = ECB6654F166D4F7D0086F91E /* Default-568h@2x.png */; };
 		ECB66553166D4F7D0086F91E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECB66551166D4F7D0086F91E /* MainStoryboard.storyboard */; };
 		ECB665AB166D53F00086F91E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = ECB665AA166D53F00086F91E /* libxml2.dylib */; };
+		ECDA408A189D9EE8009E8590 /* SBFTwitterManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDA4089189D9EE8009E8590 /* SBFTwitterManagerTests.m */; };
+		ECDA4093189DA557009E8590 /* Mocktail.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDA408E189DA557009E8590 /* Mocktail.m */; };
+		ECDA4094189DA557009E8590 /* MocktailResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDA4090189DA557009E8590 /* MocktailResponse.m */; };
+		ECDA4095189DA557009E8590 /* MocktailURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDA4092189DA557009E8590 /* MocktailURLProtocol.m */; };
+		ECDA4097189DA678009E8590 /* twitter.tail in Resources */ = {isa = PBXBuildFile; fileRef = ECDA4096189DA678009E8590 /* twitter.tail */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +103,15 @@
 		ECB6654F166D4F7D0086F91E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		ECB66552166D4F7D0086F91E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		ECB665AA166D53F00086F91E /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		ECDA4089189D9EE8009E8590 /* SBFTwitterManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFTwitterManagerTests.m; sourceTree = "<group>"; };
+		ECDA408C189DA557009E8590 /* Mocktail_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mocktail_Private.h; path = "Followers Tests/Mocktail/Mocktail_Private.h"; sourceTree = "<group>"; };
+		ECDA408D189DA557009E8590 /* Mocktail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mocktail.h; path = "Followers Tests/Mocktail/Mocktail.h"; sourceTree = "<group>"; };
+		ECDA408E189DA557009E8590 /* Mocktail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mocktail.m; path = "Followers Tests/Mocktail/Mocktail.m"; sourceTree = "<group>"; };
+		ECDA408F189DA557009E8590 /* MocktailResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MocktailResponse.h; path = "Followers Tests/Mocktail/MocktailResponse.h"; sourceTree = "<group>"; };
+		ECDA4090189DA557009E8590 /* MocktailResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MocktailResponse.m; path = "Followers Tests/Mocktail/MocktailResponse.m"; sourceTree = "<group>"; };
+		ECDA4091189DA557009E8590 /* MocktailURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MocktailURLProtocol.h; path = "Followers Tests/Mocktail/MocktailURLProtocol.h"; sourceTree = "<group>"; };
+		ECDA4092189DA557009E8590 /* MocktailURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MocktailURLProtocol.m; path = "Followers Tests/Mocktail/MocktailURLProtocol.m"; sourceTree = "<group>"; };
+		ECDA4096189DA678009E8590 /* twitter.tail */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = twitter.tail; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +146,8 @@
 			children = (
 				EC017F55188B22BA0016F8F5 /* Followers_Tests.m */,
 				EC017F5E188B23530016F8F5 /* SBFTwitterUserTests.m */,
+				ECDA4089189D9EE8009E8590 /* SBFTwitterManagerTests.m */,
+				ECDA4096189DA678009E8590 /* twitter.tail */,
 				EC017F50188B22BA0016F8F5 /* Supporting Files */,
 			);
 			name = Tests;
@@ -237,10 +253,25 @@
 		ECB66560166D53120086F91E /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				ECDA408B189DA536009E8590 /* Mocktail */,
 				EC15EE7D188B380200D948D1 /* GTM */,
 			);
 			name = "3rd Party";
 			path = ..;
+			sourceTree = "<group>";
+		};
+		ECDA408B189DA536009E8590 /* Mocktail */ = {
+			isa = PBXGroup;
+			children = (
+				ECDA408C189DA557009E8590 /* Mocktail_Private.h */,
+				ECDA408D189DA557009E8590 /* Mocktail.h */,
+				ECDA408E189DA557009E8590 /* Mocktail.m */,
+				ECDA408F189DA557009E8590 /* MocktailResponse.h */,
+				ECDA4090189DA557009E8590 /* MocktailResponse.m */,
+				ECDA4091189DA557009E8590 /* MocktailURLProtocol.h */,
+				ECDA4092189DA557009E8590 /* MocktailURLProtocol.m */,
+			);
+			name = Mocktail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC017F54188B22BA0016F8F5 /* InfoPlist.strings in Resources */,
+				ECDA4097189DA678009E8590 /* twitter.tail in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,8 +381,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECDA4094189DA557009E8590 /* MocktailResponse.m in Sources */,
+				ECDA4095189DA557009E8590 /* MocktailURLProtocol.m in Sources */,
+				ECDA408A189D9EE8009E8590 /* SBFTwitterManagerTests.m in Sources */,
 				EC15EE81188B39F800D948D1 /* GTMCodeCoverageTestsXC.m in Sources */,
 				EC15EE79188B2F6000D948D1 /* SBFTwitterUser.m in Sources */,
+				ECDA4093189DA557009E8590 /* Mocktail.m in Sources */,
 				EC017F5F188B23530016F8F5 /* SBFTwitterUserTests.m in Sources */,
 				EC017F56188B22BA0016F8F5 /* Followers_Tests.m in Sources */,
 			);

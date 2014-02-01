@@ -28,17 +28,17 @@
 
 - (void)testTwitterUser
 {
-    NSString *screenName = @"Super";
-    NSString *name = @"Clark Kent";
-    NSString *location = @"Metropolis";
-    NSString *description = @"Just another working stiff";
-    NSString *profile_image_url = @"http://upload.wikimedia.org/wikipedia/en/7/72/Superman.jpg";
-    NSString *url = @"http://en.wikipedia.org/wiki/Daily_Planet";
-    NSString *follwers_count = @"1933";
-    NSString *statuses_count = @"20114";
-    NSString *st_text = @"Just making another phone call.";
-    NSString *st_id = @"1234";
-    NSString *st_in_reply_to_status_id = @"1233";
+    NSString *screenName                = @"Super";
+    NSString *name                      = @"Clark Kent";
+    NSString *location                  = @"Metropolis";
+    NSString *description               = @"Just another working stiff";
+    NSString *profile_image_url         = @"http://upload.wikimedia.org/wikipedia/en/7/72/Superman.jpg";
+    NSString *url                       = @"http://en.wikipedia.org/wiki/Daily_Planet";
+    NSString *follwers_count            = @"1933";
+    NSString *statuses_count            = @"20114";
+    NSString *st_text                   = @"Just making another phone call.";
+    NSString *st_id                     = @"1234";
+    NSString *st_in_reply_to_status_id  = @"1233";
     
     NSDictionary *twDict = @{
                              @"screen_name":        screenName,
