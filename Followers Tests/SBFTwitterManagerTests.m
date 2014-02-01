@@ -26,7 +26,8 @@
     self.twMgr = [[SBFTwitterManager alloc] init];
     
     self.resourceBundle = [NSBundle bundleForClass:[self class]];
-    self.mocktail = [Mocktail startWithContentsOfDirectoryAtURL:[self.resourceBundle bundleURL]];
+    NSURL *mockDir = [self.resourceBundle bundleURL];
+    self.mocktail = [Mocktail startWithContentsOfDirectoryAtURL:mockDir];
     
 }
 
@@ -49,8 +50,8 @@
     NSString *description               = @"Mac/iOS developer, bunny slave, car geek, reformed astrophysicist, practicing parrothead.";
     NSString *url                       = @"http://t.co/vHSW6S3Fkp";
     NSString *follwers_count            = @"87";
-    NSString *statuses_count            = @"1032";
-    NSString *st_text                   = @"Assuming this is a day in the life of @jspaleta at McMurdo. \u201c@Hay: Best Thing I've Seen All Week\nvia @IFLScience\n http://t.co/Sp6WmobXZs\u201d";
+    NSString *statuses_count            = @"1033";
+    NSString *st_text                   = @"Cottleston, Cottleston, Cottleston Pie\nA fish can't whistle & neither can I\nAsk me a riddle & I reply\nCottleston, Cottleston, Cottleston Pie";
     
     
     [self.twMgr fetchInfoForUser:@"jaylyerly" completionBlock:^(SBFTwitterUser *user){

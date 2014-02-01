@@ -82,7 +82,7 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
                 [request performRequestWithHandler: ^(NSData *responseData, NSHTTPURLResponse *urlResponse,  NSError *error) {
                     if (responseData) {
                         // This is useful to capture response strings for generating test data
-                        //NSString *stringData = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+                        // NSString *stringData = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
                         if (urlResponse.statusCode >= 200 && urlResponse.statusCode < 300) {
                             NSError *jsonError;
                             NSDictionary *returnDict =  [NSJSONSerialization JSONObjectWithData:responseData
