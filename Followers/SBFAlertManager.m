@@ -17,6 +17,11 @@
 @implementation SBFAlertManager
 
 +(SBFAlertManager *)sharedManager {
+    // Don't show blocking alerts in Unit Test Mode
+    if ([[[NSProcessInfo processInfo] environment] objectForKey:@"SBFUnitTestMode"]){
+        return nil;
+    }
+
     static SBFAlertManager *_manager = nil;
     static dispatch_once_t onceToken;
     

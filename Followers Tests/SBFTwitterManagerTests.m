@@ -7,9 +7,15 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
+#import <Accounts/Accounts.h>
 #import "SBFTwitterManager.h"
 #import "SBFTwitterUser.h"
 #import "Mocktail.h"
+
+@interface SBFTwitterManager (TestingPrivates)
+@property (nonatomic, strong)   ACAccountStore *accountStore;
+@end
 
 @interface SBFTwitterManagerTests : XCTestCase
 @property (strong, nonatomic) SBFTwitterManager *twMgr;
@@ -24,15 +30,33 @@
 {
     [super setUp];
     self.twMgr = [[SBFTwitterManager alloc] init];
-    
+
+    // Enable Mocktail to provide faux twitter response from file
     self.resourceBundle = [NSBundle bundleForClass:[self class]];
     NSURL *mockDir = [self.resourceBundle bundleURL];
     self.mocktail = [Mocktail startWithContentsOfDirectoryAtURL:mockDir];
     
+    // Fake an account store that always grants access to accounts
+    id mockAccountStore = [OCMockObject niceMockForClass:[ACAccountStore class]];
+    self.twMgr.accountStore = mockAccountStore;
+    [[[mockAccountStore stub] andCall:@selector(requestAccessToAccountsWithType:options:completion:) onObject:self]
+                                     requestAccessToAccountsWithType:[OCMArg any]
+                                     options:[OCMArg any]
+                                     completion:[OCMArg any]
+     ];
+
+}
+
+- (void) requestAccessToAccountsWithType:(ACAccountType*)type
+                                 options:(NSDictionary *)dict
+                              completion:(ACAccountStoreRequestAccessCompletionHandler)completion {
+    // just execute the completion block with access granted and no error
+    completion(YES,nil);    
 }
 
 - (void)tearDown
 {
+    self.twMgr.accountStore = nil;
     self.twMgr = nil;
     self.resourceBundle = nil;
     [self.mocktail stop];

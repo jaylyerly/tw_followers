@@ -112,6 +112,13 @@
 		ECDA4091189DA557009E8590 /* MocktailURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MocktailURLProtocol.h; path = "Followers Tests/Mocktail/MocktailURLProtocol.h"; sourceTree = "<group>"; };
 		ECDA4092189DA557009E8590 /* MocktailURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MocktailURLProtocol.m; path = "Followers Tests/Mocktail/MocktailURLProtocol.m"; sourceTree = "<group>"; };
 		ECDA4096189DA678009E8590 /* twitter.tail */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = twitter.tail; sourceTree = "<group>"; };
+		ECDA4099189DB4FE009E8590 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSNotificationCenter+OCMAdditions.h"; path = "Followers Tests/OCMock/OCMock/NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
+		ECDA409A189DB4FE009E8590 /* OCMArg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCMArg.h; path = "Followers Tests/OCMock/OCMock/OCMArg.h"; sourceTree = "<group>"; };
+		ECDA409B189DB4FE009E8590 /* OCMConstraint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCMConstraint.h; path = "Followers Tests/OCMock/OCMock/OCMConstraint.h"; sourceTree = "<group>"; };
+		ECDA409C189DB4FE009E8590 /* OCMock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCMock.h; path = "Followers Tests/OCMock/OCMock/OCMock.h"; sourceTree = "<group>"; };
+		ECDA409D189DB4FE009E8590 /* OCMockObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCMockObject.h; path = "Followers Tests/OCMock/OCMock/OCMockObject.h"; sourceTree = "<group>"; };
+		ECDA409E189DB4FE009E8590 /* OCMockRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCMockRecorder.h; path = "Followers Tests/OCMock/OCMock/OCMockRecorder.h"; sourceTree = "<group>"; };
+		ECDA409F189DB509009E8590 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = "Followers Tests/OCMock/libOCMock.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +155,7 @@
 				EC017F5E188B23530016F8F5 /* SBFTwitterUserTests.m */,
 				ECDA4089189D9EE8009E8590 /* SBFTwitterManagerTests.m */,
 				ECDA4096189DA678009E8590 /* twitter.tail */,
+				ECB66560166D53120086F91E /* 3rd Party */,
 				EC017F50188B22BA0016F8F5 /* Supporting Files */,
 			);
 			name = Tests;
@@ -227,7 +235,6 @@
 				EC15EE89188DFF2900D948D1 /* SBFAlertManager.h */,
 				EC15EE8A188DFF2900D948D1 /* SBFAlertManager.m */,
 				ECB66540166D4F7D0086F91E /* Supporting Files */,
-				ECB66560166D53120086F91E /* 3rd Party */,
 			);
 			path = Followers;
 			sourceTree = "<group>";
@@ -253,6 +260,7 @@
 		ECB66560166D53120086F91E /* 3rd Party */ = {
 			isa = PBXGroup;
 			children = (
+				ECDA4098189DB49A009E8590 /* OCMock */,
 				ECDA408B189DA536009E8590 /* Mocktail */,
 				EC15EE7D188B380200D948D1 /* GTM */,
 			);
@@ -272,6 +280,20 @@
 				ECDA4092189DA557009E8590 /* MocktailURLProtocol.m */,
 			);
 			name = Mocktail;
+			sourceTree = "<group>";
+		};
+		ECDA4098189DB49A009E8590 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				ECDA409F189DB509009E8590 /* libOCMock.a */,
+				ECDA4099189DB4FE009E8590 /* NSNotificationCenter+OCMAdditions.h */,
+				ECDA409A189DB4FE009E8590 /* OCMArg.h */,
+				ECDA409B189DB4FE009E8590 /* OCMConstraint.h */,
+				ECDA409C189DB4FE009E8590 /* OCMock.h */,
+				ECDA409D189DB4FE009E8590 /* OCMockObject.h */,
+				ECDA409E189DB4FE009E8590 /* OCMockRecorder.h */,
+			);
+			name = OCMock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -471,8 +493,20 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/Followers\\ Tests/OCMock",
+				);
 				INFOPLIST_FILE = "Followers Tests/Followers Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-force_load",
+					"$(SRCROOT)/Followers\\ Tests/OCMock/libOCMock.a",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -502,8 +536,20 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/Followers\\ Tests/OCMock",
+				);
 				INFOPLIST_FILE = "Followers Tests/Followers Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-force_load",
+					"$(SRCROOT)/Followers\\ Tests/OCMock/libOCMock.a",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
