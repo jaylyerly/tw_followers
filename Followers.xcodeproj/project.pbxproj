@@ -160,10 +160,8 @@
 				EC017F55188B22BA0016F8F5 /* Followers_Tests.m */,
 				EC017F5E188B23530016F8F5 /* SBFTwitterUserTests.m */,
 				ECDA4089189D9EE8009E8590 /* SBFTwitterManagerTests.m */,
-				ECDA4096189DA678009E8590 /* twitter_users_show.tail */,
-				ECDA40A2189EE792009E8590 /* twitter_followers_list.tail */,
-				ECDA40A3189EE792009E8590 /* twitter_statuses_user_timeline.tail */,
 				ECDA40A0189DF319009E8590 /* SBFAlertManagerTests.m */,
+				ECDA40A6189EEA08009E8590 /* Twitter Test Data */,
 				ECB66560166D53120086F91E /* 3rd Party */,
 				EC017F50188B22BA0016F8F5 /* Supporting Files */,
 			);
@@ -303,6 +301,16 @@
 				ECDA409E189DB4FE009E8590 /* OCMockRecorder.h */,
 			);
 			name = OCMock;
+			sourceTree = "<group>";
+		};
+		ECDA40A6189EEA08009E8590 /* Twitter Test Data */ = {
+			isa = PBXGroup;
+			children = (
+				ECDA4096189DA678009E8590 /* twitter_users_show.tail */,
+				ECDA40A2189EE792009E8590 /* twitter_followers_list.tail */,
+				ECDA40A3189EE792009E8590 /* twitter_statuses_user_timeline.tail */,
+			);
+			name = "Twitter Test Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

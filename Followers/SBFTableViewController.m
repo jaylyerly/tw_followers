@@ -101,16 +101,6 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
     return [SBFTwitterManager sharedManager].defaultUsername;
 }
 
-#pragma mark - IBActions
-
--(IBAction)popToHome:(id)sender
-{
-    //self.rootViewController.jumpToFollowers = YES;
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
-
-#pragma mark - Custom Methods
 -(void)refresh{
     [self initialSetup];  // reset all the bits
     [self.refreshControl endRefreshing];
@@ -135,6 +125,14 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
         DLog(@"number of followers: %d", [self.followers count]);
         [self.tableView reloadData];
     });
+}
+
+#pragma mark - IBActions
+
+-(IBAction)popToHome:(id)sender
+{
+    //self.rootViewController.jumpToFollowers = YES;
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source
