@@ -15,6 +15,7 @@
 
 @interface SBFTwitterManager (TestingPrivates)
 @property (nonatomic, strong)   ACAccountStore *accountStore;
+- (BOOL)userHasAccessToTwitter;
 @end
 
 @interface SBFTwitterManagerTests : XCTestCase
@@ -29,8 +30,11 @@
 - (void)setUp
 {
     [super setUp];
-    self.twMgr = [[SBFTwitterManager alloc] init];
-
+    // Mock twitter manager to always have access to Twitter 
+    id mockTwMgr = [OCMockObject partialMockForObject:[[SBFTwitterManager alloc]init]];
+    [[[mockTwMgr stub] andReturnValue:@YES] userHasAccessToTwitter];
+    self.twMgr = mockTwMgr;
+    
     // Enable Mocktail to provide faux twitter response from file
     self.resourceBundle = [NSBundle bundleForClass:[self class]];
     NSURL *mockDir = [self.resourceBundle bundleURL];
