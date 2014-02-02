@@ -45,8 +45,10 @@
 		ECDA4093189DA557009E8590 /* Mocktail.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDA408E189DA557009E8590 /* Mocktail.m */; };
 		ECDA4094189DA557009E8590 /* MocktailResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDA4090189DA557009E8590 /* MocktailResponse.m */; };
 		ECDA4095189DA557009E8590 /* MocktailURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDA4092189DA557009E8590 /* MocktailURLProtocol.m */; };
-		ECDA4097189DA678009E8590 /* twitter.tail in Resources */ = {isa = PBXBuildFile; fileRef = ECDA4096189DA678009E8590 /* twitter.tail */; };
+		ECDA4097189DA678009E8590 /* twitter_users_show.tail in Resources */ = {isa = PBXBuildFile; fileRef = ECDA4096189DA678009E8590 /* twitter_users_show.tail */; };
 		ECDA40A1189DF319009E8590 /* SBFAlertManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDA40A0189DF319009E8590 /* SBFAlertManagerTests.m */; };
+		ECDA40A4189EE792009E8590 /* twitter_followers_list.tail in Resources */ = {isa = PBXBuildFile; fileRef = ECDA40A2189EE792009E8590 /* twitter_followers_list.tail */; };
+		ECDA40A5189EE792009E8590 /* twitter_statuses_user_timeline.tail in Resources */ = {isa = PBXBuildFile; fileRef = ECDA40A3189EE792009E8590 /* twitter_statuses_user_timeline.tail */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,7 +114,7 @@
 		ECDA4090189DA557009E8590 /* MocktailResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MocktailResponse.m; path = "Followers Tests/Mocktail/MocktailResponse.m"; sourceTree = "<group>"; };
 		ECDA4091189DA557009E8590 /* MocktailURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MocktailURLProtocol.h; path = "Followers Tests/Mocktail/MocktailURLProtocol.h"; sourceTree = "<group>"; };
 		ECDA4092189DA557009E8590 /* MocktailURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MocktailURLProtocol.m; path = "Followers Tests/Mocktail/MocktailURLProtocol.m"; sourceTree = "<group>"; };
-		ECDA4096189DA678009E8590 /* twitter.tail */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = twitter.tail; sourceTree = "<group>"; };
+		ECDA4096189DA678009E8590 /* twitter_users_show.tail */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = twitter_users_show.tail; sourceTree = "<group>"; };
 		ECDA4099189DB4FE009E8590 /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSNotificationCenter+OCMAdditions.h"; path = "Followers Tests/OCMock/OCMock/NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
 		ECDA409A189DB4FE009E8590 /* OCMArg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCMArg.h; path = "Followers Tests/OCMock/OCMock/OCMArg.h"; sourceTree = "<group>"; };
 		ECDA409B189DB4FE009E8590 /* OCMConstraint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCMConstraint.h; path = "Followers Tests/OCMock/OCMock/OCMConstraint.h"; sourceTree = "<group>"; };
@@ -121,6 +123,8 @@
 		ECDA409E189DB4FE009E8590 /* OCMockRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCMockRecorder.h; path = "Followers Tests/OCMock/OCMock/OCMockRecorder.h"; sourceTree = "<group>"; };
 		ECDA409F189DB509009E8590 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = "Followers Tests/OCMock/libOCMock.a"; sourceTree = "<group>"; };
 		ECDA40A0189DF319009E8590 /* SBFAlertManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFAlertManagerTests.m; sourceTree = "<group>"; };
+		ECDA40A2189EE792009E8590 /* twitter_followers_list.tail */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = twitter_followers_list.tail; sourceTree = "<group>"; };
+		ECDA40A3189EE792009E8590 /* twitter_statuses_user_timeline.tail */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = twitter_statuses_user_timeline.tail; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,7 +160,9 @@
 				EC017F55188B22BA0016F8F5 /* Followers_Tests.m */,
 				EC017F5E188B23530016F8F5 /* SBFTwitterUserTests.m */,
 				ECDA4089189D9EE8009E8590 /* SBFTwitterManagerTests.m */,
-				ECDA4096189DA678009E8590 /* twitter.tail */,
+				ECDA4096189DA678009E8590 /* twitter_users_show.tail */,
+				ECDA40A2189EE792009E8590 /* twitter_followers_list.tail */,
+				ECDA40A3189EE792009E8590 /* twitter_statuses_user_timeline.tail */,
 				ECDA40A0189DF319009E8590 /* SBFAlertManagerTests.m */,
 				ECB66560166D53120086F91E /* 3rd Party */,
 				EC017F50188B22BA0016F8F5 /* Supporting Files */,
@@ -375,8 +381,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECDA40A4189EE792009E8590 /* twitter_followers_list.tail in Resources */,
+				ECDA40A5189EE792009E8590 /* twitter_statuses_user_timeline.tail in Resources */,
 				EC017F54188B22BA0016F8F5 /* InfoPlist.strings in Resources */,
-				ECDA4097189DA678009E8590 /* twitter.tail in Resources */,
+				ECDA4097189DA678009E8590 /* twitter_users_show.tail in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

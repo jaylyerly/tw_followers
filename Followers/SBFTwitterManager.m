@@ -93,7 +93,7 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
                             }
                             else {
                                 // Our JSON deserialization went awry
-                                NSLog(@"JSON Error: %@", [jsonError localizedDescription]);
+                                DLog(@"JSON Error: %@", [jsonError localizedDescription]);
                             }
                         }
                         else {
@@ -108,7 +108,7 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
                 }];
             } else {
                 // Access was not granted, or an error occurred
-                NSLog(@"%@", [error localizedDescription]);
+                DLog(@"%@", [error localizedDescription]);
             }
                                                 
             }];
@@ -121,18 +121,18 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
 }
 
 - (void) handleRateLimit:(NSHTTPURLResponse *)urlResponse{
-    NSLog(@"The response status code is %d", urlResponse.statusCode);
+    DLog(@"The response status code is %d", urlResponse.statusCode);
     NSDictionary *headers = [urlResponse allHeaderFields];
-    NSLog(@"headers: %@", headers);
+    DLog(@"headers: %@", headers);
     
     if (urlResponse.statusCode == 429){
         NSInteger reset = [(NSString *)headers[@"x-rate-limit-reset"] integerValue];
         NSDate *resetDate = [NSDate dateWithTimeIntervalSince1970:reset];
-        NSLog(@"Current time is %@", [NSDate date]);
-        NSLog(@"Rate limit reset at %@", resetDate);
+        DLog(@"Current time is %@", [NSDate date]);
+        DLog(@"Rate limit reset at %@", resetDate);
         NSInteger minutes = floor([resetDate timeIntervalSinceNow] / 60);
         NSInteger seconds = ((int)[resetDate timeIntervalSinceNow]) % 60;
-        NSLog(@"Rate limit reset in %02d:%02d ", minutes, seconds);
+        DLog(@"Rate limit reset in %02d:%02d ", minutes, seconds);
         NSString *msg = [NSString stringWithFormat:@"Rate limit reset in\n%02d:%02d minutes", minutes, seconds];
         NSString *title = @"Uh-oh!  Twitter API rate limit exceeded";
         [[SBFAlertManager sharedManager] displayAlertTitle:title message:msg completionBlock:nil];
@@ -174,7 +174,7 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
 }
 
 
-- (void)fetchTimelineForUser:(NSString *)username {
+- (void)fetchTimelineForUser:(NSString *)username completionBlock:(SBFTwitterTimelineBlock)block {
     NSURL *url = [self urlForPath:@"statuses/user_timeline.json"];
     
     NSDictionary *params = @{
@@ -185,7 +185,8 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
                              };
     
     SBFTwitterRequestSuccess successBlock = ^(NSDictionary* returnDict) {
-        NSLog(@"Timeline Response: %@\n", returnDict);
+        DLog(@"Timeline Response: %@\n", returnDict);
+        block(returnDict);
     };
     
     [self twitterRequest:url params:params onSuccess:successBlock onError:nil];

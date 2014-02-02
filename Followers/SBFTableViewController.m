@@ -132,7 +132,7 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
 
 -(void) reloadOnMainThread {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSLog(@"number of followers: %d", [self.followers count]);
+        DLog(@"number of followers: %d", [self.followers count]);
         [self.tableView reloadData];
     });
 }

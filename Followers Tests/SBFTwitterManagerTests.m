@@ -13,6 +13,8 @@
 #import "SBFTwitterUser.h"
 #import "Mocktail.h"
 
+static const NSTimeInterval SBFTwitterManagerTestTimeLimit = 5;
+
 @interface SBFTwitterManager (TestingPrivates)
 @property (nonatomic, strong)   ACAccountStore *accountStore;
 - (BOOL)userHasAccessToTwitter;
@@ -68,6 +70,16 @@
     [super tearDown];
 }
 
+- (void)waitFor:(BOOL *)aBool {
+    NSDate *start = [NSDate date];
+    while (!*aBool && ( [[NSDate date] timeIntervalSinceDate:start] < SBFTwitterManagerTestTimeLimit )) {
+        // This executes another run loop.
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        // Sleep 1/100th sec
+        usleep(10000);
+    }
+}
+
 - (void)testUserInfo
 {
     __block BOOL testComplete = NO;
@@ -95,16 +107,41 @@
         testComplete = YES;
     }];
     
-    // Give the async call 5 second to return
-    NSDate *start = [NSDate date];
-    while (!testComplete && ( [[NSDate date] timeIntervalSinceDate:start] < 5 )) {
-        // This executes another run loop.
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-        // Sleep 1/100th sec
-        usleep(10000);
-    }
-    XCTAssertTrue(testComplete, @"TRcompletion block did not execute");;
+    [self waitFor:&testComplete];
+
+    XCTAssertTrue(testComplete, @"Completion block did not execute");;
     
 }
+
+- (void)testFollowers {
+    
+    __block BOOL testComplete = NO;
+
+    [self.twMgr fetchFollowersForUser:@"jaylyerly" cursor:@"-1" completionBlock:^(NSArray *friends, NSString *next_cursor)
+    {
+        XCTAssert([friends count] == 87);
+        testComplete = YES;
+    }];
+    
+    [self waitFor:&testComplete];
+
+    XCTAssertTrue(testComplete, @"Completion block did not execute");;
+}
+
+- (void)testTimeline {
+    __block BOOL testComplete = NO;
+    
+    [self.twMgr fetchTimelineForUser:@"jaylyerly" completionBlock:^(NSDictionary *dict)
+     {
+         XCTAssertNotNil(dict, @"Timeline dictionary is nil");
+         testComplete = YES;
+     }];
+    
+    [self waitFor:&testComplete];
+    
+    XCTAssertTrue(testComplete, @"Completion block did not execute");;
+    
+}
+
 
 @end
