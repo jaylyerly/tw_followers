@@ -35,6 +35,16 @@ static const NSTimeInterval SBFAlertManagerTestTimeLimit = 5;
     [super tearDown];
 }
 
+- (void)waitFor:(BOOL *)aBool {
+    NSDate *start = [NSDate date];
+    while (!*aBool && ( [[NSDate date] timeIntervalSinceDate:start] < SBFAlertManagerTestTimeLimit )) {
+        // This executes another run loop.
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        // Sleep 1/100th sec
+        usleep(10000);
+    }
+}
+
 - (void)testShared
 {
     XCTAssertNil([SBFAlertManager sharedManager], @"sharedManager should be nil in unit test mode");
@@ -52,15 +62,8 @@ static const NSTimeInterval SBFAlertManagerTestTimeLimit = 5;
                                                message:@"bar"
                                        completionBlock:^(BOOL didShow){ testComplete = YES; }];
 
-    NSDate *start = [NSDate date];
-    while (!testComplete && ( [[NSDate date] timeIntervalSinceDate:start] < SBFAlertManagerTestTimeLimit )) {
-        // This executes another run loop.
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-        // Sleep 1/100th sec
-        usleep(10000);
-    }
-    
-    // should call 'show'
+    [self waitFor:&testComplete];
+
     [mockAlertView verify];
     XCTAssertFalse(didDisplay);
     XCTAssert(testComplete, @"Failed to execute completion block.");
@@ -83,15 +86,8 @@ static const NSTimeInterval SBFAlertManagerTestTimeLimit = 5;
                                                message:@"bar"
                                        completionBlock:^(BOOL didShow){ testComplete = YES; }];
     
-    NSDate *start = [NSDate date];
-    while (!testComplete && ( [[NSDate date] timeIntervalSinceDate:start] < SBFAlertManagerTestTimeLimit )) {
-        // This executes another run loop.
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-        // Sleep 1/100th sec
-        usleep(10000);
-    }
-    
-    // should call 'show'
+    [self waitFor:&testComplete];
+
     [mockAlertView verify];
     XCTAssert(didDisplay);
     XCTAssert(testComplete, @"Failed to execute completion block.");
