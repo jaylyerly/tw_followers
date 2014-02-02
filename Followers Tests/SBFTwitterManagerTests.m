@@ -143,5 +143,10 @@ static const NSTimeInterval SBFTwitterManagerTestTimeLimit = 5;
     
 }
 
+- (void)testShared
+{
+    XCTAssertNil([SBFTwitterManager sharedManager], @"sharedManager should be nil in unit test mode");
+}
+
 
 @end
