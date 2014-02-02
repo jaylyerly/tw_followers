@@ -7,7 +7,12 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <OCMock/OCMock.h>
 #import "SBFTwitterUser.h"
+
+@interface SBFTwitterUser (PrivateTesting)
+- (void)addAvatarWithRoundedCorners:(UIImage *)newAvatar;
+@end
 
 @interface SBFTwitterUserTests : XCTestCase
 @end
@@ -84,6 +89,20 @@
     XCTAssertTrue([bats compareName:sups] == NSOrderedAscending);
     XCTAssertTrue([sups compareName:sups] == NSOrderedSame);
     XCTAssertTrue([sups compareName:bats] == NSOrderedDescending);
+}
+
+- (void)testNotifcationForAvatar
+{
+    id observerMock = [OCMockObject observerMock];
+    [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:SBFTwitterUserDidUpdateAvatarNotification object:nil];
+    [[observerMock expect] notificationWithName:SBFTwitterUserDidUpdateAvatarNotification object:[OCMArg any] userInfo:[OCMArg any]];
+    
+    SBFTwitterUser *bats = [[SBFTwitterUser alloc] initWithDictionary:@{@"screen_name":@"Batman",   @"name":@"Bruce Wayne"}];
+    UIImage *img = [[UIImage alloc] init];
+    [bats addAvatarWithRoundedCorners:img];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
+    [observerMock verify];
 }
 
 @end
