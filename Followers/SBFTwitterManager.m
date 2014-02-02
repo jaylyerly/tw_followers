@@ -115,7 +115,8 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
     } else {
         // No access to twitter -- ie, no account
         [[SBFAlertManager sharedManager] displayAlertTitle:@"No Twitter Access"
-                                                   message:@"Did you configure your Twitter accounts in the system settings?"];
+                                                   message:@"Did you configure your Twitter accounts in the system settings?"
+                                           completionBlock:nil];
     }
 }
 
@@ -134,7 +135,7 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
         NSLog(@"Rate limit reset in %02d:%02d ", minutes, seconds);
         NSString *msg = [NSString stringWithFormat:@"Rate limit reset in\n%02d:%02d minutes", minutes, seconds];
         NSString *title = @"Uh-oh!  Twitter API rate limit exceeded";
-        [[SBFAlertManager sharedManager] displayAlertTitle:title message:msg];
+        [[SBFAlertManager sharedManager] displayAlertTitle:title message:msg completionBlock:nil];
     }
 }
 

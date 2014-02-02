@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^SBFAlertManagerCompletionBlock)(BOOL didShow);
+
 @interface SBFAlertManager : NSObject
 
 + (SBFAlertManager *)sharedManager;
-- (BOOL) displayAlertTitle:(NSString *)title message:(NSString *)msg;
+- (BOOL) displayAlertTitle:(NSString *)title message:(NSString *)msg completionBlock:(SBFAlertManagerCompletionBlock)block;
 
 @end

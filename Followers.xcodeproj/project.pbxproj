@@ -46,6 +46,7 @@
 		ECDA4094189DA557009E8590 /* MocktailResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDA4090189DA557009E8590 /* MocktailResponse.m */; };
 		ECDA4095189DA557009E8590 /* MocktailURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDA4092189DA557009E8590 /* MocktailURLProtocol.m */; };
 		ECDA4097189DA678009E8590 /* twitter.tail in Resources */ = {isa = PBXBuildFile; fileRef = ECDA4096189DA678009E8590 /* twitter.tail */; };
+		ECDA40A1189DF319009E8590 /* SBFAlertManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ECDA40A0189DF319009E8590 /* SBFAlertManagerTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		ECDA409D189DB4FE009E8590 /* OCMockObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCMockObject.h; path = "Followers Tests/OCMock/OCMock/OCMockObject.h"; sourceTree = "<group>"; };
 		ECDA409E189DB4FE009E8590 /* OCMockRecorder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OCMockRecorder.h; path = "Followers Tests/OCMock/OCMock/OCMockRecorder.h"; sourceTree = "<group>"; };
 		ECDA409F189DB509009E8590 /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOCMock.a; path = "Followers Tests/OCMock/libOCMock.a"; sourceTree = "<group>"; };
+		ECDA40A0189DF319009E8590 /* SBFAlertManagerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBFAlertManagerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 				EC017F5E188B23530016F8F5 /* SBFTwitterUserTests.m */,
 				ECDA4089189D9EE8009E8590 /* SBFTwitterManagerTests.m */,
 				ECDA4096189DA678009E8590 /* twitter.tail */,
+				ECDA40A0189DF319009E8590 /* SBFAlertManagerTests.m */,
 				ECB66560166D53120086F91E /* 3rd Party */,
 				EC017F50188B22BA0016F8F5 /* Supporting Files */,
 			);
@@ -407,6 +410,7 @@
 				ECDA4095189DA557009E8590 /* MocktailURLProtocol.m in Sources */,
 				ECDA408A189D9EE8009E8590 /* SBFTwitterManagerTests.m in Sources */,
 				EC15EE81188B39F800D948D1 /* GTMCodeCoverageTestsXC.m in Sources */,
+				ECDA40A1189DF319009E8590 /* SBFAlertManagerTests.m in Sources */,
 				EC15EE79188B2F6000D948D1 /* SBFTwitterUser.m in Sources */,
 				ECDA4093189DA557009E8590 /* Mocktail.m in Sources */,
 				EC017F5F188B23530016F8F5 /* SBFTwitterUserTests.m in Sources */,

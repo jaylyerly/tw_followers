@@ -41,8 +41,9 @@
     return self;
 }
 
-- (BOOL) displayAlertTitle:(NSString *)title message:(NSString *)msg{
+- (BOOL) displayAlertTitle:(NSString *)title message:(NSString *)msg completionBlock:(SBFAlertManagerCompletionBlock)block{
     if (self.isShowing){
+        block(NO);
         return NO;
     } else {
         self.isShowing = YES;
@@ -52,6 +53,7 @@
                                        delegate:self
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil] show];
+            block(YES);
         });
         return YES;
     }
