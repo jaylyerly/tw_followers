@@ -87,7 +87,11 @@ static const NSUInteger kSBFTableViewSectionFollowers = 1;
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.title = [NSString stringWithFormat:@"@%@",self.username];
+    if (self.username){
+        self.title = [NSString stringWithFormat:@"@%@",self.username];
+    } else {
+        self.title = @"Followers";
+    }
 }
 
 - (NSString *)username {

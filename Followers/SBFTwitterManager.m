@@ -147,7 +147,7 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
     NSURL *url = [self urlForPath:@"followers/list.json"];
     
     NSDictionary *params = @{
-                             @"screen_name"            : username,
+                             @"screen_name"            : username ?: @"",
                              @"skip_status"            : @"1",
                              @"count"                  : SBFTwitterBatchSize,
                              @"include_user_entities"  : @"false",
@@ -194,7 +194,7 @@ typedef void (^SBFTwitterRequestError)(NSHTTPURLResponse *urlResponse,  NSError 
 - (void)fetchInfoForUser:(NSString *)username completionBlock:(SBFTwitterInfoBlock)completionBlock {
     NSURL *url = [self urlForPath:@"users/show.json"];
     
-    NSDictionary *params = @{ @"screen_name" : username };
+    NSDictionary *params = @{ @"screen_name" : username ?: @"" };
     
     SBFTwitterRequestSuccess successBlock = ^(NSDictionary* returnDict) {
         SBFTwitterUser *user = [[SBFTwitterUser alloc] initWithDictionary:returnDict];
